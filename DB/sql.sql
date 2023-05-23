@@ -1,13 +1,10 @@
 create database vegetable_management;
 use vegetable_management;
 
-
 create table app_role(
 id_role int primary key auto_increment not null,
 name_role varchar(50)
 );
-
-
 
 create table users(
 id int primary key auto_increment not null,
@@ -39,33 +36,33 @@ create table product(
     price bigint,
     weight float,
     descriptions varchar(1000),
+    quantity_storage int,
     mfg date,
     exp date,
     image varchar(45),
     id_type_product int,
     foreign key (id_type_product) references type_product(id)
 );
-
+create table payment(
+	id int primary key auto_increment not null, 
+    type_payment varchar(45)
+);
 create table bill(
 	id int primary key auto_increment not null,
     name_customer varchar(45) , 
     phone_number varchar(11),
     sale_date date ,
     id_user int ,
-    foreign key (id_user) references users(id)
-);
-create table payment(
-	id int primary key auto_increment not null, 
-    type_payment varchar(45),
-    id_bill int ,
-    foreign key(id_bill) references bill(id)
+    id_payment int,
+    foreign key (id_user) references users(id),
+    foreign key (id_payment) references payment(id)
 );
 
 create table detail_bill(
 	id_detail int primary key auto_increment not null,
     id_bill int,
     id_product int,
-    quantity int ,
+    quantity_order int ,
     total float ,
     foreign key (id_bill) references bill(id),
     foreign key (id_product) references product(id)
