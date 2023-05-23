@@ -1,5 +1,6 @@
 package com.example.castudy_module_4.dto;
 
+import com.example.castudy_module_4.model.TypeProduct;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -26,17 +27,19 @@ public class ProductDto implements Validator {
     private Double weight;
     @NotBlank(message = "Describe cannot be empty!!")
     private String describe;
+    private TypeProduct typeProduct;
 
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, String EXP, String MFG, Double weight, String describe) {
+    public ProductDto(String name, Double price, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.name = name;
         this.price = price;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
         this.describe = describe;
+        this.typeProduct = typeProduct;
     }
 
     public String getName() {
@@ -85,6 +88,14 @@ public class ProductDto implements Validator {
 
     public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    public TypeProduct getTypeProduct() {
+        return typeProduct;
+    }
+
+    public void setTypeProduct(TypeProduct typeProduct) {
+        this.typeProduct = typeProduct;
     }
 
     @Override
