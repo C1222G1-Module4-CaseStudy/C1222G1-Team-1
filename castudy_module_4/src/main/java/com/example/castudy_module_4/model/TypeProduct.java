@@ -11,6 +11,7 @@ public class TypeProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTypeProduct;
+//    @Column(name = "name_type")
     private String  nameTypeProduct;
     @OneToMany(mappedBy = "typeProduct")
 private List<Product> products;

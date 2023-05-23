@@ -1,30 +1,37 @@
 package com.example.castudy_module_4.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "name_product")
     private String name;
     private Double price;
-    private String EXP;
-    private String MFG;
+    private String img;
+    @Column(name = "exp")
+    private Date EXP;
+    @Column(name = "mfg")
+    private Date MFG;
     private Double weight;
+    @Column(name = "descriptions")
     private String describe;
 
     @ManyToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "idTypeProduct")
+    @JoinColumn(name = "id_type_product", referencedColumnName = "idTypeProduct")
     private TypeProduct typeProduct;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, Double price, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public Product(Integer id, String name, Double price, String img, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.img = img;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
@@ -56,19 +63,27 @@ public class Product {
         this.price = price;
     }
 
-    public String getEXP() {
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Date getEXP() {
         return EXP;
     }
 
-    public void setEXP(String EXP) {
+    public void setEXP(Date EXP) {
         this.EXP = EXP;
     }
 
-    public String getMFG() {
+    public Date getMFG() {
         return MFG;
     }
 
-    public void setMFG(String MFG) {
+    public void setMFG(Date MFG) {
         this.MFG = MFG;
     }
 
