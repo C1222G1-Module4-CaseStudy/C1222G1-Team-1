@@ -3,6 +3,7 @@ package com.example.castudy_module_4.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,13 +13,12 @@ public class TypeProduct {
     private Integer idTypeProduct;
     private String  nameTypeProduct;
     @OneToMany(mappedBy = "typeProduct")
-    @JsonBackReference
-private Set<Product> products;
+private List<Product> products;
 
     public TypeProduct() {
     }
 
-    public TypeProduct(Integer idTypeProduct, String nameTypeProduct, Set<Product> products) {
+    public TypeProduct(Integer idTypeProduct, String nameTypeProduct, List<Product> products) {
         this.idTypeProduct = idTypeProduct;
         this.nameTypeProduct = nameTypeProduct;
         this.products = products;
@@ -40,11 +40,11 @@ private Set<Product> products;
         this.nameTypeProduct = nameTypeProduct;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 }
