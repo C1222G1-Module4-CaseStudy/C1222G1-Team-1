@@ -20,8 +20,7 @@ public class ProductController {
 
     @GetMapping("")
     public String listProduct(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
-                              Pageable pageable, @RequestParam(value = "searchByName", defaultValue = ""),
-                              @RequestParam(value = "searchByPrice", defaultValue = "")
+                              Pageable pageable, @RequestParam(value = "searchByName", defaultValue = "")
                               String search, Model model) {
         model.addAttribute("typeList", iProductService.findAll());
         model.addAttribute("products", iProductService.searchByName(search, pageable));
