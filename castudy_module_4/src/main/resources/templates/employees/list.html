@@ -29,8 +29,8 @@
         <td th:text="${employee.gender}"></td>
         <td th:text="${employee.address}"></td>
         <td th:text="${employee.phoneNumber}"></td>
-        <td th:text="${employee.employeeType.name}"></td>
-        <td></td>
+        <td th:text="${employee.employeeType?.name}"></td>
+        <td><button><a th:href="@{/employee/{id}/update(id=${employee.id})}">Update</a></button></td>
         <td>
             <button th:attr="onclick=|deleteById('${employee.getId()}','${employee.getFullName()}')|" type="button"
                     class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#modelId">

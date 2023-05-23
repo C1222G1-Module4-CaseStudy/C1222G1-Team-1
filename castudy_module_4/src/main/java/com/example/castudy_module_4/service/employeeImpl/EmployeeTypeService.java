@@ -1,8 +1,8 @@
-package com.example.case_study.service.impl;
+package com.example.castudy_module_4.service.employeeImpl;
 
-import com.example.case_study.model.EmployeeType;
-import com.example.case_study.repository.IEmployeeTypeRepository;
-import com.example.case_study.service.IEmployeeTypeService;
+import com.example.castudy_module_4.model.employee.EmployeeType;
+import com.example.castudy_module_4.repository.IEmployeeTypeRepository;
+import com.example.castudy_module_4.service.IEmployeeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

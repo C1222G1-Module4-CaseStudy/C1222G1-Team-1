@@ -1,4 +1,4 @@
-package com.example.case_study.model;
+package com.example.castudy_module_4.model.employee;
 
 import javax.persistence.*;
 
@@ -13,20 +13,23 @@ public class Employee {
     private String gender;
     private  String address;
     private String phoneNumber;
+    private String userName;
+    private String password;
     @ManyToOne
     @JoinColumn(name = "id_employee",referencedColumnName = "id")
     private EmployeeType employeeType;
-
     public Employee() {
     }
 
-    public Employee(int id, String fullName, String email, String gender, String address, String phoneNumber, EmployeeType employeeType) {
+    public Employee(int id, String fullName, String email, String gender, String address, String phoneNumber, String userName, String password, EmployeeType employeeType) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.userName = userName;
+        this.password = password;
         this.employeeType = employeeType;
     }
 
@@ -84,5 +87,21 @@ public class Employee {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
