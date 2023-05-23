@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create product</title>
+</head>
+<body>
+<form th:object="${employeeDTO}" method="post" action="/employee/create">
+  <div class="input-group">
+    <label for="fullName">Full name : </label>
+    <input type="text"
+           class="form-control" name="fullName" id="fullName" aria-describedby="helpId" placeholder="" th:field="*{fullName}">
+  </div>
+    <div class="input-group">
+    <label for="email">email : </label>
+    <input type="text"
+           class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="" th:field="*{email}">
+  </div>
+    <div class="input-group">
+    <label for="gender">Gender : </label>
+    <input type="text"
+           class="form-control" name="gender" id="gender" aria-describedby="helpId" placeholder="" th:field="*{gender}">
+  </div>
+    <div class="input-group">
+    <label for="address">Address : </label>
+    <input type="text"
+           class="form-control" name="address" id="address" aria-describedby="helpId" placeholder="" th:field="*{address}">
+  </div>
+    <select>
+        <option th:each="employeeType,inerStat :${employeeType}" th:value="${employeeType.id}">
+            <p th:text="${employeeType.name}"></p>
+        </option>
+    </select>
+    <button type="submit">Save</button>
+</form>
+
+
+</body>
+</html>
