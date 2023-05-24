@@ -46,6 +46,8 @@ create table product(
     foreign key (id_type_product) references type_product(id)
 );
 
+alter table product add column quantity int;
+
 create table bill(
 	id int primary key auto_increment not null,
     name_customer varchar(45) , 
