@@ -1,13 +1,13 @@
 package com.example.castudy_module_4.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user" ,nullable = false)
     private int id;
     private String fullName;
     private String email;
@@ -18,6 +18,8 @@ public class Users {
     @Column(name="username")
     private String userName;
     private String password;
+    @OneToMany(mappedBy = "roles")
+    List<UserRole> userRoles;
 
     public Users() {
     }

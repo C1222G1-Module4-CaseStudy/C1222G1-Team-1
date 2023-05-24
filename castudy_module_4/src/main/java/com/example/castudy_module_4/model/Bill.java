@@ -1,7 +1,10 @@
 package com.example.castudy_module_4.model;
 
+import com.example.castudy_module_4.model.product.Product;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 //import java.util.Date;
 
 @Entity
@@ -11,13 +14,12 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name_customer")
     private String nameCustomer;
 
-    @Column(name = "phone_number")
+
     private String phoneNumber;
 
-    @Column(name = "sale_date")
+
     private Date saleDate;
 
     @ManyToOne
@@ -27,8 +29,6 @@ public class Bill {
     @ManyToOne
     @JoinColumn(name = "id_payment")
     private Payment payment;
-
-
     public Bill() {
     }
 
