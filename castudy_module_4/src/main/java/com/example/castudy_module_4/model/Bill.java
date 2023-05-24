@@ -28,6 +28,7 @@ public class Bill {
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
+
     public Bill() {
     }
 

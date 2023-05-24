@@ -8,6 +8,7 @@ public class Roles {
 
     @Id
     @GeneratedValue
+    @Column(name = "id_role",nullable = false)
     private int idRole;
 
     @Column(name = "name_role", length = 30, nullable = false)
