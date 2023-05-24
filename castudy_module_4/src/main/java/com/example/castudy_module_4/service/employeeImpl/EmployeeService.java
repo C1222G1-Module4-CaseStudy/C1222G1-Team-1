@@ -1,8 +1,7 @@
 package com.example.castudy_module_4.service.employeeImpl;
 
-import com.example.castudy_module_4.model.employee.Employee;
+import com.example.castudy_module_4.model.Users;
 import com.example.castudy_module_4.repository.IEmployeeRepository;
-import com.example.castudy_module_4.repository.IEmployeeTypeRepository;
 import com.example.castudy_module_4.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +14,12 @@ public class EmployeeService implements IEmployeeService {
     private IEmployeeRepository employeeRepository;
 
     @Override
-    public List<Employee> getAll() {
+    public List<Users> getAll() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public void save(Employee employee) {
+    public void save(Users employee) {
         employeeRepository.save(employee);
     }
 
@@ -30,12 +29,12 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Employee findById(int id) {
+    public Users findById(int id) {
         return employeeRepository.findById(id).get();
     }
 
     @Override
-    public void update(Employee employee) {
+    public void update(Users employee) {
         employeeRepository.save(employee);
     }
 }

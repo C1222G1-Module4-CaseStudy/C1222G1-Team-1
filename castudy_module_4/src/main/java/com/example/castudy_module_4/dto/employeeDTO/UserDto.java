@@ -1,28 +1,29 @@
-package com.example.castudy_module_4.model.employee;
+package com.example.castudy_module_4.dto.employeeDTO;
 
-import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class UserDto {
+    @NotBlank(message = "Không được để trống")
     private String fullName;
+    @Email(message = "phải thuộc dạng email chuẩn xxx@gmail.com")
     private String email;
+    @NotBlank(message = "Không được để trống")
     private String gender;
-    private  String address;
+    @NotBlank(message = "Không được để trống ")
+    private String address;
+    @Pattern(regexp = "^\\d{2}-0\\d{9}$",message = "Số điện thoại phải 0xxxxxxxxx")
     private String phoneNumber;
+    @NotBlank(message = "Không được để trống")
     private String userName;
+    @NotBlank(message = "Không được để trống")
     private String password;
-    @ManyToOne
-    @JoinColumn(name = "id_employee",referencedColumnName = "id")
-    private EmployeeType employeeType;
-    public Employee() {
+
+    public UserDto() {
     }
 
-    public Employee(int id, String fullName, String email, String gender, String address, String phoneNumber, String userName, String password, EmployeeType employeeType) {
-        this.id = id;
+    public UserDto(String fullName, String email, String gender, String address, String phoneNumber, String userName, String password) {
         this.fullName = fullName;
         this.email = email;
         this.gender = gender;
@@ -30,15 +31,6 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.userName = userName;
         this.password = password;
-        this.employeeType = employeeType;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFullName() {
@@ -71,14 +63,6 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public EmployeeType getEmployeeType() {
-        return employeeType;
-    }
-
-    public void setEmployeeType(EmployeeType employeeType) {
-        this.employeeType = employeeType;
     }
 
     public String getPhoneNumber() {

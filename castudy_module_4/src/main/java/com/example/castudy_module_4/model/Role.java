@@ -1,24 +1,24 @@
-package com.example.castudy_module_4.model.employee;
+package com.example.castudy_module_4.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "employee_type")
-public class EmployeeType {
+@Table(name = "app_role",
+        uniqueConstraints = { //
+                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
+
+public class Role {
     @Id
     private  int id;
     private String name;
     @OneToMany(mappedBy = "employeeType")
-    private List<Employee> employees;
+    private List<Users> employees;
 
-    public EmployeeType() {
+    public Role() {
     }
 
-    public EmployeeType(int id, String name, List<Employee> employees) {
+    public Role(int id, String name, List<Users> employees) {
         this.id = id;
         this.name = name;
         this.employees = employees;
@@ -40,11 +40,11 @@ public class EmployeeType {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
+    public List<Users> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(List<Users> employees) {
         this.employees = employees;
     }
 }

@@ -1,18 +1,17 @@
 package com.example.castudy_module_4.service;
 
-import com.example.castudy_module_4.dto.employeeDTO.EmployeeDTO;
-import com.example.castudy_module_4.model.employee.Employee;
+import com.example.castudy_module_4.model.Users;
 
 import java.util.List;
 
 public interface IEmployeeService {
-    List<Employee> getAll();
+    List<Users> getAll();
 
-    void save(Employee employee);
+    void save(Users employee);
 
     void delete(int id);
 
-    Employee findById(int id);
+    Users findById(int id);
 
-    void update(Employee employee);
+    void update(Users employee);
 }

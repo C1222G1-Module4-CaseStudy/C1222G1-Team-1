@@ -1,6 +1,6 @@
 package com.example.castudy_module_4.service.employeeImpl;
 
-import com.example.castudy_module_4.model.employee.EmployeeType;
+import com.example.castudy_module_4.model.Role;
 import com.example.castudy_module_4.repository.IEmployeeTypeRepository;
 import com.example.castudy_module_4.service.IEmployeeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class EmployeeTypeService implements IEmployeeTypeService {
     private IEmployeeTypeRepository employeeTypeRepository;
 
     @Override
-    public List<EmployeeType> getAll() {
+    public List<Role> getAll() {
         return employeeTypeRepository.findAll();
     }
 }
