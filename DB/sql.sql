@@ -46,6 +46,9 @@ create table product(
     id_type_product int,
     foreign key (id_type_product) references type_product(id)
 );
+
+alter table product add column quantity int;
+
 alter table product modify column image varchar(1000);
 insert into product values (1, 'rau muống', 8000, '0.5', 'rau muống sạch', 50, '2023-05-23', '2023-05-30', 'https://ik.imagekit.io/nguyenhoang/lotteria_images/drink/drink_7upmelonpeach.png', 1);
 create table payment(
