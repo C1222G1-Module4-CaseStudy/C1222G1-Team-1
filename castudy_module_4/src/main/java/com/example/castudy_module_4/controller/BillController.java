@@ -20,6 +20,7 @@ public class BillController {
     @GetMapping("/bill")
     public String getBills(Model model){
         model.addAttribute("bills", billService.getAll());
+        model.addAttribute("detailbills", billService.getAll());
         return "listBill";
     }
 
