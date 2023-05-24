@@ -1,7 +1,6 @@
 create database vegetable_management;
 use vegetable_management;
 
-
 create table app_role(
 id_role int primary key auto_increment not null,
 name_role varchar(50)
@@ -40,12 +39,16 @@ create table product(
     price bigint,
     weight float,
     descriptions varchar(1000),
+    quantity_storage int,
     mfg date,
     exp date,
     image varchar(45),
     id_type_product int,
     foreign key (id_type_product) references type_product(id)
 );
+
+alter table product add column quantity int;
+
 alter table product modify column image varchar(1000);
 insert into product values (1, 'rau muống', 8000, '0.5', 'rau muống sạch', 50, '2023-05-23', '2023-05-30', 'https://ik.imagekit.io/nguyenhoang/lotteria_images/drink/drink_7upmelonpeach.png', 1);
 create table payment(
@@ -59,20 +62,16 @@ create table bill(
     phone_number varchar(11),
     sale_date date ,
     id_user int ,
-    foreign key (id_user) references users(id)
-);
-create table payment(
-	id int primary key auto_increment not null, 
-    type_payment varchar(45),
-    id_bill int ,
-    foreign key(id_bill) references bill(id)
+    id_payment int,
+    foreign key (id_user) references users(id),
+    foreign key (id_payment) references payment(id)
 );
 insert into bill values (1, 'Lê Văn A', '0987654321', curdate(), 1, 2);
 create table detail_bill(
 	id_detail int primary key auto_increment not null,
     id_bill int,
     id_product int,
-    quantity int ,
+    quantity_order int ,
     total float ,
     foreign key (id_bill) references bill(id),
     foreign key (id_product) references product(id)
