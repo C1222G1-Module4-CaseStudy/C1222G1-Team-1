@@ -31,7 +31,7 @@ public class LoginController {
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("user", userService.findUserByUsername(auth.getName());
+        model.addAttribute("user", userService.findUserByUsername(auth.getName()));
         return "adminPage";
     }
 

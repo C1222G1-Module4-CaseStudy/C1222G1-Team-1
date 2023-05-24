@@ -1,4 +1,4 @@
-package com.example.castudy_module_4.model;
+package com.example.castudy_module_4.model.product;
 
 import javax.persistence.*;
 
@@ -112,19 +112,4 @@ public class Product {
         this.typeProduct = typeProduct;
     }
 
-
-@Entity
-@Table(name = "product")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

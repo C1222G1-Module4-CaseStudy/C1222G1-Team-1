@@ -1,5 +1,7 @@
 package com.example.castudy_module_4.model;
 
+import com.example.castudy_module_4.model.product.Product;
+
 import javax.persistence.*;
 
 @Entity

@@ -1,7 +1,7 @@
-package com.example.castudy_module_4.service.impl;
+package com.example.castudy_module_4.service.productImpl;
 
-import com.example.castudy_module_4.model.TypeProduct;
-import com.example.castudy_module_4.repository.ITypeProductRepository;
+import com.example.castudy_module_4.model.product.TypeProduct;
+import com.example.castudy_module_4.repository.product.ITypeProductRepository;
 import com.example.castudy_module_4.service.ITypeProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.castudy_module_4.controller;
+package com.example.castudy_module_4.controller.product;
 
 import com.example.castudy_module_4.service.IProductService;
 import com.example.castudy_module_4.service.ITypeProductService;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 
-@RequestMapping("/")
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private IProductService iProductService;
     @Autowired
     private ITypeProductService iTypeProductService;
 
-    @GetMapping("")
+    @GetMapping()
     public String listProduct(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
                               Pageable pageable, @RequestParam(value = "searchByName", defaultValue = "")
                               String search, Model model) {
         model.addAttribute("typeList", iTypeProductService.findAll());
         model.addAttribute("products", iProductService.searchByName(search, pageable));
         model.addAttribute("searchByName", search);
-        return "/list";
+        return "/product/list_product";
     }
 }

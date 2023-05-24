@@ -1,10 +1,9 @@
-package com.example.castudy_module_4.model;
+package com.example.castudy_module_4.model.product;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.castudy_module_4.model.product.Product;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class TypeProduct {

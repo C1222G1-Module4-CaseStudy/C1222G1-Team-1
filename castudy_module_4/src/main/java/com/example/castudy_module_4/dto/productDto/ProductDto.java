@@ -1,6 +1,6 @@
-package com.example.castudy_module_4.dto;
+package com.example.castudy_module_4.dto.productDto;
 
-import com.example.castudy_module_4.model.TypeProduct;
+import com.example.castudy_module_4.model.product.TypeProduct;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
