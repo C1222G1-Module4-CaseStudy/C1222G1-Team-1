@@ -3,9 +3,7 @@ package com.example.castudy_module_4.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users",
-        uniqueConstraints = { //
-        @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
+@Table(name = "users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +18,12 @@ public class Users {
     private String password;
     @ManyToOne
     @JoinColumn(name = "id_user",referencedColumnName = "id")
-    private Role employeeType;
+    private Roles roles;
     public Users() {
 
     }
 
-    public Users(int id, String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, Role employeeType) {
+    public Users(int id, String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, Roles roles) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -35,15 +33,7 @@ public class Users {
         this.image = image;
         this.userName = userName;
         this.password = password;
-        this.employeeType = employeeType;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -86,20 +76,20 @@ public class Users {
         this.address = address;
     }
 
-    public Role getEmployeeType() {
-        return employeeType;
-    }
-
-    public void setEmployeeType(Role employeeType) {
-        this.employeeType = employeeType;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUserName() {
@@ -116,5 +106,13 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 }
