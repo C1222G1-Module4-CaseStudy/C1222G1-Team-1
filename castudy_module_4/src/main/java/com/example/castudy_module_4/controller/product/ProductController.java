@@ -1,17 +1,25 @@
 package com.example.castudy_module_4.controller.product;
 
+import com.example.castudy_module_4.dto.productDto.ProductDto;
+import com.example.castudy_module_4.model.product.Product;
 import com.example.castudy_module_4.service.IProductService;
 import com.example.castudy_module_4.service.ITypeProductService;
+
 import com.example.castudy_module_4.service.IUserService;
+
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 
@@ -30,6 +38,27 @@ public class ProductController {
         model.addAttribute("typeList", iTypeProductService.findAll());
         model.addAttribute("products", iProductService.searchByName(search, pageable));
         model.addAttribute("searchByName", search);
-        return "/product/list_product";
+        return "/products/list_product";
+    }
+
+    @GetMapping("/create-form-product")
+    public String getCreateProduct(Model model) {
+        model.addAttribute("productDto", new ProductDto());
+        model.addAttribute("typeList", iTypeProductService.findAll());
+        return "/products/create_product";
+    }
+
+    @PostMapping("/add")
+    public String addProduct(@ModelAttribute @Validated ProductDto productDto, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("typeList", iTypeProductService.findAll());
+            return "/products/create_product";
+        }
+        Product product = new Product();
+        BeanUtils.copyProperties(productDto, product);
+        iProductService.create(product);
+        redirectAttributes.addFlashAttribute("msg", "Thêm mới sản phẩm thành công!");
+        return "redirect:/product";
     }
 }

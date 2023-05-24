@@ -12,10 +12,18 @@ public class Product {
     private Integer id;
     private String name_product;
     private Double price;
+    private Integer quantity;
     private String img;
+
 
     private Date EXP;
     private Date MFG;
+
+    @Column(name = "exp")
+    private String EXP;
+    @Column(name = "mfg")
+    private String MFG;
+
     private Double weight;
 
     private String descriptions;
@@ -27,10 +35,15 @@ public class Product {
     public Product() {
     }
 
+
     public Product(Integer id, String name_product, Double price, String img, Date EXP, Date MFG, Double weight, String descriptions, TypeProduct typeProduct) {
+
+    public Product(Integer id, String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+
         this.id = id;
         this.name_product = name_product;
         this.price = price;
+        this.quantity = quantity;
         this.img = img;
         this.EXP = EXP;
         this.MFG = MFG;
@@ -63,6 +76,14 @@ public class Product {
         this.price = price;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public String getImg() {
         return img;
     }
@@ -71,19 +92,19 @@ public class Product {
         this.img = img;
     }
 
-    public Date getEXP() {
+    public String getEXP() {
         return EXP;
     }
 
-    public void setEXP(Date EXP) {
+    public void setEXP(String EXP) {
         this.EXP = EXP;
     }
 
-    public Date getMFG() {
+    public String getMFG() {
         return MFG;
     }
 
-    public void setMFG(Date MFG) {
+    public void setMFG(String MFG) {
         this.MFG = MFG;
     }
 
