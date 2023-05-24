@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<h2>Thêm mới sản phẩm</h2>
+<a th:href="@{/product}">Quay về trang chủ</a>
+<form action="/product/add" th:object="${productDto}" method="post">
+    <div class="input-group">
+        <label for="fullName">Tên sản phẩm : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="fullName" aria-describedby="helpId" placeholder=""
+               th:field="*{name}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{name}"></span>
+    </div>
+    <div class="input-group">
+        <label for="price">Giá : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="price" aria-describedby="helpId" placeholder=""
+               th:field="*{price}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{price}"></span>
+    </div>
+    <div class="input-group">
+        <label for="quantity">Số lượng : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="quantity" aria-describedby="helpId" placeholder=""
+               th:field="*{quantity}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{quantity}"></span>
+    </div>
+    <div class="input-group">
+    <label for="img">Hình ảnh : </label>
+    <input type="text"
+           class="form-control" name="fullName" id="img" aria-describedby="helpId" placeholder=""
+           th:field="*{img}">
+    <span th:if="${#fields.hasErrors()}" th:errors="*{img}"></span>
+    </div>
+    <div class="input-group">
+        <label for="mfg">Ngày sản xuất : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="mfg" aria-describedby="helpId" placeholder=""
+               th:field="*{MFG}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{MFG}"></span>
+    </div>
+    <div class="input-group">
+        <label for="exp">Ngày hết hạn : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="exp" aria-describedby="helpId" placeholder=""
+               th:field="*{EXP}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{EXP}"></span>
+    </div>
+<!--    <div class="input-group">-->
+<!--        <label for="type">Loại sản phẩm : </label>-->
+<!--        <input type="text"-->
+<!--               class="form-control" name="fullName" id="type" aria-describedby="helpId" placeholder=""-->
+<!--               th:field="*{typeProduct.nameTypeProduct}">-->
+<!--        <span th:if="${#fields.hasErrors()}" th:errors="*{typeProduct.nameTypeProduct}"></span>-->
+<!--    </div>-->
+    <select name="typeProduct">
+        <option th:each="item, status:${typeList}" th:value="${item.getIdTypeProduct()}">
+            <p th:text="${item.nameTypeProduct}"></p>
+        </option>
+    </select>
+    <div class="input-group">
+        <label for="weight">Trọng lượng : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="weight" aria-describedby="helpId" placeholder=""
+               th:field="*{weight}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{weight}"></span>
+    </div>
+    <div class="input-group">
+        <label for="describe">Chi tiết : </label>
+        <input type="text"
+               class="form-control" name="fullName" id="describe" aria-describedby="helpId" placeholder=""
+               th:field="*{describe}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{describe}"></span>
+    </div>
+    <button type="submit">Lưu</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>

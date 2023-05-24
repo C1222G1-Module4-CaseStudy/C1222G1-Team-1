@@ -1,40 +1,51 @@
 package com.example.castudy_module_4.dto.productDto;
 
 import com.example.castudy_module_4.model.product.TypeProduct;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 public class ProductDto implements Validator {
-    @NotBlank(message = "Name cannot be engine!")
+    @NotBlank(message = "Tên sản phẩm không được để trống!")
     private String name;
-    @NotBlank(message = "Price cannot be blank!")
-    @Pattern(regexp = "^\\d*(\\.\\d+)?$", message = "Amount must be a positive integer or decimal!")
+
+    @NotNull
+    @DecimalMin("0.0")
+    @DecimalMax(value = "99999.99", message = "qq")
+//    @Pattern(regexp = "^\\d*(\\.\\d+)?$", message = "Amount must be a positive integer or decimal!")
     private Double price;
-    @NotBlank(message = "EXP cannot be blank!")
+    @NotNull(message = "Số lượng không được để trống!")
+    private Integer quantity;
+    //    @NotBlank(message = "Image cannot be blank!")
+    @NotNull
+    private String img;
+    @NotNull(message = "Vui lòng không để trống!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String EXP;
-    @NotBlank(message = "MFG cannot be blank!")
+    @NotNull(message = "Vui lòng không để trống!")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String MFG;
-    @NotBlank(message = "Weight cannot be empty!!")
-    @Size(min = 1)
+    @NotNull(message = "Vui lòng nhập thông tin, không được để trống!")
     private Double weight;
-    @NotBlank(message = "Describe cannot be empty!!")
+    @NotBlank(message = "Vui lòng nhập thông tin, không được để trống!")
     private String describe;
     private TypeProduct typeProduct;
 
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public ProductDto(String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
+        this.img = img;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
@@ -56,6 +67,22 @@ public class ProductDto implements Validator {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getEXP() {
