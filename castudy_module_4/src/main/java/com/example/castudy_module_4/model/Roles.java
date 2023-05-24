@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class Roles {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_role")
+    @GeneratedValue
     private int idRole;
 
     @Column(name = "name_role", length = 30, nullable = false)

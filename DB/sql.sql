@@ -77,3 +77,5 @@ create table detail_bill(
     foreign key (id_product) references product(id)
 );
 insert into detail_bill values (1, 1, 1, 1, 8000);
+
+alter table detail_bill drop column id;

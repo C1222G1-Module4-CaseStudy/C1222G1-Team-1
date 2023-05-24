@@ -7,27 +7,24 @@ import javax.persistence.*;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
     private int id;
-    @Column(name = "full_name")
     private String fullName;
     private String email;
     private String gender;
-    private  String address;
-    @Column(name = "phone_number")
+    private String address;
     private String phoneNumber;
-    private String image ;
+    private String image;
+    @Column(name="username")
     private String userName;
     private String password;
-    @ManyToOne
-    @JoinColumn(name = "id_user",referencedColumnName = "id")
-    private Roles roles;
-    public Users() {
+    private String country;
+    private String dayOfBirth;
+    private String description;
 
+    public Users() {
     }
 
-    public Users(int id, String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, Roles roles) {
-        this.id = id;
+    public Users(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, String country, String dayOfBirth, String description) {
         this.fullName = fullName;
         this.email = email;
         this.gender = gender;
@@ -36,7 +33,33 @@ public class Users {
         this.image = image;
         this.userName = userName;
         this.password = password;
-        this.roles = roles;
+        this.country = country;
+        this.dayOfBirth = dayOfBirth;
+        this.description = description;
+    }
+
+    public String getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {
@@ -109,13 +132,5 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
     }
 }

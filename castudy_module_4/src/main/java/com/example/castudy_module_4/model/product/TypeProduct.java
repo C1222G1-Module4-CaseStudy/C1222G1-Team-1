@@ -6,10 +6,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "type_product")
 public class TypeProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTypeProduct;
+    @Column(name = "id")
+    private int id;
 //    @Column(name = "name_type")
     private String  nameTypeProduct;
     @OneToMany(mappedBy = "typeProduct")
@@ -18,18 +20,18 @@ private List<Product> products;
     public TypeProduct() {
     }
 
-    public TypeProduct(Integer idTypeProduct, String nameTypeProduct, List<Product> products) {
-        this.idTypeProduct = idTypeProduct;
+    public TypeProduct(int id, String nameTypeProduct, List<Product> products) {
+        this.id = id;
         this.nameTypeProduct = nameTypeProduct;
         this.products = products;
     }
 
-    public Integer getIdTypeProduct() {
-        return idTypeProduct;
+    public int getId() {
+        return id;
     }
 
-    public void setIdTypeProduct(Integer idTypeProduct) {
-        this.idTypeProduct = idTypeProduct;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNameTypeProduct() {

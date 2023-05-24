@@ -1,36 +1,68 @@
-package com.example.castudy_module_4.dto.employeeDTO;
+package com.example.castudy_module_4.dto;
 
-import javax.validation.constraints.Email;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class UserDto {
+//    @NotBlank(message = "Không được để trống")
+    private int id;
     @NotBlank(message = "Không được để trống")
     private String fullName;
-    @Email(message = "phải thuộc dạng email chuẩn xxx@gmail.com")
+
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" , message = "Mời nhập đụng định dạng abc@gmail.com")
+    @NotBlank(message = "Không được để trống")
     private String email;
+
     @NotBlank(message = "Không được để trống")
     private String gender;
+
     @NotBlank(message = "Không được để trống ")
     private String address;
-    @Pattern(regexp = "^\\d{2}-0\\d{9}$",message = "Số điện thoại phải 0xxxxxxxxx")
+
+    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại phải 0xxxxxxxxx")
     private String phoneNumber;
+
+    private String image;
+
     @NotBlank(message = "Không được để trống")
     private String userName;
+
     @NotBlank(message = "Không được để trống")
     private String password;
+
+    @NotBlank(message = "Không được để trống ")
+    private String country;
+
+    @NotBlank(message = "Không được để trống ")
+    private String dayOfBirth;
+
+    @NotBlank(message = "Không được để trống ")
+    private String description;
 
     public UserDto() {
     }
 
-    public UserDto(String fullName, String email, String gender, String address, String phoneNumber, String userName, String password) {
+    public UserDto(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, String country, String dayOfBirth, String description) {
         this.fullName = fullName;
         this.email = email;
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.image = image;
         this.userName = userName;
         this.password = password;
+        this.country = country;
+        this.dayOfBirth = dayOfBirth;
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -73,6 +105,14 @@ public class UserDto {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -87,5 +127,29 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
