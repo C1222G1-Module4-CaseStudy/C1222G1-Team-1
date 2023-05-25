@@ -13,16 +13,16 @@ public class TypeProduct {
     @Column(name = "id")
     private int id;
 //    @Column(name = "name_type")
-    private String  nameTypeProduct;
+    private String  nameType;
     @OneToMany(mappedBy = "typeProduct")
 private List<Product> products;
 
     public TypeProduct() {
     }
 
-    public TypeProduct(int id, String nameTypeProduct, List<Product> products) {
+    public TypeProduct(int id, String nameType, List<Product> products) {
         this.id = id;
-        this.nameTypeProduct = nameTypeProduct;
+        this.nameType = nameType;
         this.products = products;
     }
 
@@ -35,11 +35,11 @@ private List<Product> products;
     }
 
     public String getNameTypeProduct() {
-        return nameTypeProduct;
+        return nameType;
     }
 
-    public void setNameTypeProduct(String nameTypeProduct) {
-        this.nameTypeProduct = nameTypeProduct;
+    public void setNameType(String nameType) {
+        this.nameType = nameType;
     }
 
     public List<Product> getProducts() {

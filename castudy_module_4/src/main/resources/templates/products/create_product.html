@@ -29,18 +29,18 @@
         <span th:if="${#fields.hasErrors()}" th:errors="*{price}"></span>
     </div>
     <div class="input-group">
-        <label for="quantity">Số lượng : </label>
+        <label for="quantity_storage">Số lượng : </label>
         <input type="text"
-               class="form-control" name="fullName" id="quantity" aria-describedby="helpId" placeholder=""
-               th:field="*{quantity}">
-        <span th:if="${#fields.hasErrors()}" th:errors="*{quantity}"></span>
+               class="form-control" name="fullName" id="quantity_storage" aria-describedby="helpId" placeholder=""
+               th:field="*{quantityStorage}">
+        <span th:if="${#fields.hasErrors()}" th:errors="*{quantityStorage}"></span>
     </div>
     <div class="input-group">
     <label for="img">Hình ảnh : </label>
     <input type="text"
            class="form-control" name="fullName" id="img" aria-describedby="helpId" placeholder=""
-           th:field="*{img}">
-    <span th:if="${#fields.hasErrors()}" th:errors="*{img}"></span>
+           th:field="*{image}">
+    <span th:if="${#fields.hasErrors()}" th:errors="*{image}"></span>
     </div>
     <div class="input-group">
         <label for="mfg">Ngày sản xuất : </label>

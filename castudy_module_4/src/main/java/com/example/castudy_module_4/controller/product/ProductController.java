@@ -87,10 +87,14 @@ public class ProductController {
         return "redirect:/product";
     }
 
+//    @GetMapping
+
+
     @GetMapping("/warehouse")
     public String warehouse(Model model){
         model.addAttribute("listProduct" , this.iProductService.findAll());
 
         return "/products/warehouse";
     }
+
 }
