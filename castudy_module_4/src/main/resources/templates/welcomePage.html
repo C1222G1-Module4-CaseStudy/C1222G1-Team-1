@@ -12,10 +12,13 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
+<header>
+    <th:block th:include="/menu"></th:block>
+</header>
+<div class="content">
+    <div th:include="/sidebar"></div>
+</div>
 
-<th:block th:include="/menu"></th:block>
-<div th:include="/sidebar"></div>
-<!--<h2>Message : <span th:utext="${message}"></span></h2>-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
