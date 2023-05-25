@@ -12,8 +12,8 @@ public class Product {
     @Column(name = "name_product")
     private String name;
     private Double price;
-    private Integer quantity;
-    private String img;
+    private Integer quantityStorage;
+    private String imgage;
     @Column(name = "exp")
     private String EXP;
     @Column(name = "mfg")
@@ -29,17 +29,33 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public Product(Integer id, String name, Double price, Integer quantityStorage, String imgage, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
-        this.img = img;
+        this.quantityStorage = quantityStorage;
+        this.imgage = imgage;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
         this.describe = describe;
         this.typeProduct = typeProduct;
+    }
+
+    public Integer getQuantityStorage() {
+        return quantityStorage;
+    }
+
+    public void setQuantityStorage(Integer quantityStorage) {
+        this.quantityStorage = quantityStorage;
+    }
+
+    public String getImgage() {
+        return imgage;
+    }
+
+    public void setImgage(String imgage) {
+        this.imgage = imgage;
     }
 
     public Integer getId() {
@@ -64,22 +80,6 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getEXP() {

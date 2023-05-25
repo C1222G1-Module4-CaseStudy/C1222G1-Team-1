@@ -55,7 +55,7 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("msg", "Thêm mới sản phẩm thành công!");
         return "redirect:/product";
     }
-  
+
     @GetMapping("/edit/{id}")
     public String getEditProduct(@PathVariable Integer id, Model model) {
         Product product = iProductService.findById(id);
@@ -86,3 +86,11 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("msg", "XOá thành cng sản phẩm!");
         return "redirect:/product";
     }
+
+    @GetMapping("/warehouse")
+    public String warehouse(Model model){
+        model.addAttribute("listProduct" , this.iProductService.findAll());
+
+        return "/products/warehouse";
+    }
+}
