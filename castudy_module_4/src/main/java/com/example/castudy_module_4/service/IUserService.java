@@ -9,5 +9,7 @@ public interface IUserService {
     Users findById(int id);
 
     void update(Users users);
+
+    void create(Users users);
 //    void update()
 }

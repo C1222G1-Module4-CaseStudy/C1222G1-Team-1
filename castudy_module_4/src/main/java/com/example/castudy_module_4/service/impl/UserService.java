@@ -25,4 +25,9 @@ public class UserService implements IUserService {
     public void update(Users users) {
         this.userRepository.save(users);
     }
+
+    @Override
+    public void create(Users users) {
+        this.userRepository.save(users);
+    }
 }

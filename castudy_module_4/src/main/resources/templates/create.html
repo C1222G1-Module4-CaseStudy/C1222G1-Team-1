@@ -1,185 +1,154 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1">
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="../static/css/create.css">
-
 </head>
 <body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<form th:action="@{/users/create}" method="post">
+    <section class="h-100 bg-dark" th:object="${user}">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{image}">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card card-registration my-4">
+                        <div class="row g-0">
+                            <div class="col-xl-6 d-none d-xl-block">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                     alt="Sample photo" class="img-fluid"
+                                     style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;height: 100%"/>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card-body p-md-5 text-black">
+                                    <h3 class="mb-5 text-uppercase">Thêm mới nhân viên</h3>
 
-<div class="formbold-main-wrapper">
-    <!-- Author: FormBold Team -->
-    <!-- Learn More: https://formbold.com -->
-    <div class="formbold-form-wrapper">
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example7">HỌ VÀ TÊN <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example7" class="form-control form-control-lg"
+                                               th:field="*{fullName}"/>
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{fullName}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example8">E-MAIL ID <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example8" class="form-control form-control-lg"
+                                               th:field="*{email}"/>
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{email}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example">QUỐC GIA <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example" class="form-control form-control-lg"
+                                               th:field="*{country}"/>
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{country}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example81">ĐỊA CHỈ <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example81" class="form-control form-control-lg"
+                                               th:field="*{address}"/>
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{address}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2"
+                                         th:field="*{gender}">
 
-        <img src="your-image-url-here.jpg">
+                                        <h6 class="mb-0 me-4"><span style="color: red">*</span>Giới tính :</h6>
 
-        <form action="" method="POST">
-            <div class="formbold-form-title">
-                <h2 class="">Register now</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt.
-                </p>
-            </div>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="gender"
+                                                   id="Nam"
+                                                   value="Nam"/>
+                                            <label class="form-check-label" for="Nam">Nam</label>
+                                        </div>
 
-            <div class="formbold-input-flex">
-                <div>
-                    <label for="firstname" class="formbold-form-label">
-                        First name
-                    </label>
-                    <input
-                            type="text"
-                            name="firstname"
-                            id="firstname"
-                            class="formbold-form-input"
-                    />
-                </div>
-                <div>
-                    <label for="lastname" class="formbold-form-label"> Last name </label>
-                    <input
-                            type="text"
-                            name="lastname"
-                            id="lastname"
-                            class="formbold-form-input"
-                    />
-                </div>
-            </div>
+                                        <div class="form-check form-check-inline mb-0 me-4">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                   id="Nữ"
+                                                   value="Nữ"/>
+                                            <label class="form-check-label" for="Nữ">Nữ</label>
+                                        </div>
 
-            <div class="formbold-input-flex">
-                <div>
-                    <label for="email" class="formbold-form-label"> Email </label>
-                    <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            class="formbold-form-input"
-                    />
-                </div>
-                <div>
-                    <label for="phone" class="formbold-form-label"> Phone number </label>
-                    <input
-                            type="text"
-                            name="phone"
-                            id="phone"
-                            class="formbold-form-input"
-                    />
-                </div>
-            </div>
+                                        <div class="form-check form-check-inline mb-0">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                   id="Khác"
+                                                   value="Khác"/>
+                                            <label class="form-check-label" for="Khác">Khác</label>
+                                        </div>
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{gender}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example9">SỐ ĐIỆN THOẠI <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example9" class="form-control form-control-lg"
+                                               th:field="*{phoneNumber}">
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{phoneNumber}"
+                                              style="color: red"></span>
+                                    </div>
 
-            <div class="formbold-mb-3">
-                <label for="address" class="formbold-form-label">
-                    Street Address
-                </label>
-                <input
-                        type="text"
-                        name="address"
-                        id="address"
-                        class="formbold-form-input"
-                />
-            </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example90">NGÀY SINH <span
+                                                style="color: red">*</span></label>
+                                        <input type="date" id="form3Example90" class="form-control form-control-lg"
+                                               th:field="*{dayOfBirth}">
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{dayOfBirth}"
+                                              style="color: red"></span>
+                                    </div>
 
-            <div class="formbold-mb-3">
-                <label for="address2" class="formbold-form-label">
-                    Street Address Line 2
-                </label>
-                <input
-                        type="text"
-                        name="address2"
-                        id="address2"
-                        class="formbold-form-input"
-                />
-            </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example99">TÀI KHOẢN <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example99" class="form-control form-control-lg"
+                                               th:field="*{userName}">
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{userName}"
+                                              style="color: red"></span>
+                                    </div>
 
-            <div class="formbold-input-flex">
-                <div>
-                    <label for="state" class="formbold-form-label"> State/Prvince </label>
-                    <input
-                            type="text"
-                            name="state"
-                            id="state"
-                            class="formbold-form-input"
-                    />
-                </div>
-                <div>
-                    <label for="country" class="formbold-form-label"> Country </label>
-                    <input
-                            type="text"
-                            name="country"
-                            id="country"
-                            class="formbold-form-input"
-                    />
-                </div>
-            </div>
-
-            <div class="formbold-input-flex">
-                <div>
-                    <label for="post" class="formbold-form-label"> Post/Zip code </label>
-                    <input
-                            type="text"
-                            name="post"
-                            id="post"
-                            class="formbold-form-input"
-                    />
-                </div>
-                <div>
-                    <label for="area" class="formbold-form-label"> Area Code </label>
-                    <input
-                            type="text"
-                            name="area"
-                            id="area"
-                            class="formbold-form-input"
-                    />
-                </div>
-            </div>
-
-            <div class="formbold-checkbox-wrapper">
-                <label for="supportCheckbox" class="formbold-checkbox-label">
-                    <div class="formbold-relative">
-                        <input
-                                type="checkbox"
-                                id="supportCheckbox"
-                                class="formbold-input-checkbox"
-                        />
-                        <div class="formbold-checkbox-inner">
-              <span class="formbold-opacity-0">
-                <svg
-                        width="11"
-                        height="8"
-                        viewBox="0 0 11 8"
-                        fill="none"
-                        class="formbold-stroke-current"
-                >
-                  <path
-                          d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
-                          stroke-width="0.4"
-                  ></path>
-                </svg>
-              </span>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example97">MẬT KHẨU <span
+                                                style="color: red">*</span></label>
+                                        <input type="text" id="form3Example97" class="form-control form-control-lg"
+                                               th:field="*{password}">
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{password}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="floatingTextarea2">MÔ TẢ <span
+                                                style="color: red">*</span></label>
+                                        <textarea class="form-control" placeholder="Leave a comment here"
+                                                  id="floatingTextarea2"
+                                                  style="height: 100px" th:field="*{description}"></textarea>
+                                        <span th:if="${#fields.hasErrors()}" th:errors="*{description}"
+                                              style="color: red"></span>
+                                    </div>
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <button type="submit" class="btn btn-warning btn-lg ms-2">LƯU</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    I agree to the defined
-                    <a href="#"> terms, conditions, and policies</a>
-                </label>
+                </div>
             </div>
-
-            <button class="formbold-btn">Register Now</button>
-        </form>
-    </div>
-</div>
-<style>
-
-</style>
+        </div>
+    </section>
+</form>
 </body>
 </html>

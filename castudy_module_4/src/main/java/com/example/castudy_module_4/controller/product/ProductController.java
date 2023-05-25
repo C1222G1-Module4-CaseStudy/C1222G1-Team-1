@@ -56,4 +56,5 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("msg", "Thêm mới sản phẩm thành công!");
         return "redirect:/product";
     }
+
 }

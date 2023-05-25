@@ -1,10 +1,13 @@
 package com.example.castudy_module_4.dto;
 
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public class UserDto {
+public class UserDto implements Validator {
 //    @NotBlank(message = "Không được để trống")
     private int id;
     @NotBlank(message = "Không được để trống")
@@ -151,5 +154,15 @@ public class UserDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

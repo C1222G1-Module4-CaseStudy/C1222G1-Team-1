@@ -46,5 +46,17 @@ public class UserController {
         return "redirect:/userInfo";
     }
 
+    @PostMapping("/create")
+    public String create(@Validated @ModelAttribute(value = "user") UserDto userDto ,BindingResult bindingResult , Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("user" , userDto);
+            return "create";
+        }
+        Users users = new Users();
+        BeanUtils.copyProperties(userDto , users);
+        this.userService.create(users);
+        return "redirect:/";
+    }
+
 
 }
