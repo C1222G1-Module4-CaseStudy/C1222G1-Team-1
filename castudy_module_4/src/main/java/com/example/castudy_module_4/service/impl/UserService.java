@@ -15,4 +15,19 @@ public class UserService implements IUserService {
     public Users findUserByUsername(String name) {
         return userRepository.findByUserName(name);
     }
+
+    @Override
+    public Users findById(int id) {
+        return this.userRepository.findById(id).get();
+    }
+
+    @Override
+    public void update(Users users) {
+        this.userRepository.save(users);
+    }
+
+    @Override
+    public void create(Users users) {
+        this.userRepository.save(users);
+    }
 }
