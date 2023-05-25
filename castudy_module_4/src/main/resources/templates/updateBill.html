@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update bill</title>
+</head>
+<body>
+
+<p th:text="${bill.nameCustomer}"></p>
+
+<a th:href="@{/product?billId=__${bill.id}__}">Thêm sản phẩm</a>
+<table class="table">
+    <thead>
+    <tr>
+        <td>name</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td scope="row"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

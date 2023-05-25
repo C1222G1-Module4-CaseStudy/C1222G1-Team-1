@@ -2,32 +2,26 @@ package com.example.castudy_module_4.model.product;
 
 import javax.persistence.*;
 
-import java.util.Date;
-
 @Entity
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name_product")
-    private String name;
+    private String nameProduct;
     private Double price;
-
 
     private Integer quantityStorage;
 
     private String image;
-
-    private Integer quantityStorage;
-    private String imgage;
 
     @Column(name = "exp")
     private Date EXP;
     @Column(name = "mfg")
     private Date MFG;
     private Double weight;
-    @Column(name = "descriptions")
-    private String describe;
+
+    private String descriptions;
 
     @ManyToOne
     @JoinColumn(name = "id_type_product")
@@ -37,18 +31,19 @@ public class Product {
     }
 
 
+
+
+
     public Product(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
-
-
         this.id = id;
-        this.name = name;
+        this.nameProduct = nameProduct;
         this.price = price;
         this.quantityStorage = quantityStorage;
         this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
-        this.describe = describe;
+        this.descriptions = descriptions;
         this.typeProduct = typeProduct;
     }
 
@@ -62,12 +57,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public Double getPrice() {
@@ -119,12 +114,12 @@ public class Product {
         this.weight = weight;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescriptions() {
+        return descriptions;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescriptions(String descriptions) {
+        this.descriptions = descriptions;
     }
 
     public TypeProduct getTypeProduct() {
@@ -134,5 +129,6 @@ public class Product {
     public void setTypeProduct(TypeProduct typeProduct) {
         this.typeProduct = typeProduct;
     }
+
 
 }
