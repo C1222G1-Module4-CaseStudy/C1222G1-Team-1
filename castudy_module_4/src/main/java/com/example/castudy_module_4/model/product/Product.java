@@ -12,12 +12,14 @@ public class Product {
     @Column(name = "name_product")
     private String name;
     private Double price;
-    private Integer quantity;
-    private String img;
+
+    private Integer quantity_storage;
+
+    private String image;
     @Column(name = "exp")
-    private String EXP;
+    private Date EXP;
     @Column(name = "mfg")
-    private String MFG;
+    private Date MFG;
     private Double weight;
     @Column(name = "descriptions")
     private String describe;
@@ -29,12 +31,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public Product(Integer id, String name, Double price, Integer quantity_storage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
-        this.img = img;
+        this.quantity_storage = quantity_storage;
+        this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
@@ -66,35 +68,35 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getQuantity_storage() {
+        return quantity_storage;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setQuantity_storage(Integer quantity_storage) {
+        this.quantity_storage = quantity_storage;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getEXP() {
+    public Date getEXP() {
         return EXP;
     }
 
-    public void setEXP(String EXP) {
+    public void setEXP(Date EXP) {
         this.EXP = EXP;
     }
 
-    public String getMFG() {
+    public Date getMFG() {
         return MFG;
     }
 
-    public void setMFG(String MFG) {
+    public void setMFG(Date MFG) {
         this.MFG = MFG;
     }
 

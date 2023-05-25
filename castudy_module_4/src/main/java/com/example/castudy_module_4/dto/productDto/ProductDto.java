@@ -22,16 +22,16 @@ public class ProductDto implements Validator {
 //    @Pattern(regexp = "^\\d*(\\.\\d+)?$", message = "Amount must be a positive integer or decimal!")
     private Double price;
     @NotNull(message = "Số lượng không được để trống!")
-    private Integer quantity;
+    private Integer quantity_storage;
     //    @NotBlank(message = "Image cannot be blank!")
     @NotNull
-    private String img;
+    private String image;
     @NotNull(message = "Vui lòng không để trống!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String EXP;
+    private Date EXP;
     @NotNull(message = "Vui lòng không để trống!")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private String MFG;
+    private Date MFG;
     @NotNull(message = "Vui lòng nhập thông tin, không được để trống!")
     private Double weight;
     @NotBlank(message = "Vui lòng nhập thông tin, không được để trống!")
@@ -41,11 +41,11 @@ public class ProductDto implements Validator {
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public ProductDto(String name, Double price, Integer quantity_storage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
-        this.img = img;
+        this.quantity_storage = quantity_storage;
+        this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
@@ -69,35 +69,35 @@ public class ProductDto implements Validator {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getQuantity_storage() {
+        return quantity_storage;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setQuantity_storage(Integer quantity_storage) {
+        this.quantity_storage = quantity_storage;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getEXP() {
+    public Date getEXP() {
         return EXP;
     }
 
-    public void setEXP(String EXP) {
+    public void setEXP(Date EXP) {
         this.EXP = EXP;
     }
 
-    public String getMFG() {
+    public Date getMFG() {
         return MFG;
     }
 
-    public void setMFG(String MFG) {
+    public void setMFG(Date MFG) {
         this.MFG = MFG;
     }
 
@@ -135,7 +135,7 @@ public class ProductDto implements Validator {
         ProductDto productDto = (ProductDto) target;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
-            LocalDate EXP = LocalDate.parse(productDto.getEXP(), formatter);
+            LocalDate EXP = LocalDate.parse((CharSequence) productDto.getEXP(), formatter);
             LocalDate now = LocalDate.now();
             int storageTime = Period.between(EXP, now).getDays();
             if (storageTime > 21) {
