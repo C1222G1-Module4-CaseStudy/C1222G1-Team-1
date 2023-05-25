@@ -1,30 +1,52 @@
-package com.example.castudy_module_4.model;
+package com.example.castudy_module_4.dto;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
-public class Users {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+public class UserDto implements Validator {
+//    @NotBlank(message = "Không được để trống")
     private int id;
+    @NotBlank(message = "Không được để trống")
     private String fullName;
+
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$" , message = "Mời nhập đụng định dạng abc@gmail.com")
+    @NotBlank(message = "Không được để trống")
     private String email;
+
+    @NotBlank(message = "Không được để trống")
     private String gender;
+
+    @NotBlank(message = "Không được để trống ")
     private String address;
+
+    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại phải 0xxxxxxxxx")
     private String phoneNumber;
+
     private String image;
-    @Column(name="username")
+
+    @NotBlank(message = "Không được để trống")
     private String userName;
+
+    @NotBlank(message = "Không được để trống")
     private String password;
+
+    @NotBlank(message = "Không được để trống ")
     private String country;
+
+    @NotBlank(message = "Không được để trống ")
     private String dayOfBirth;
+
+    @NotBlank(message = "Không được để trống ")
     private String description;
 
-    public Users() {
+    public UserDto() {
     }
 
-    public Users(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, String country, String dayOfBirth, String description) {
+    public UserDto(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, String country, String dayOfBirth, String description) {
         this.fullName = fullName;
         this.email = email;
         this.gender = gender;
@@ -35,30 +57,6 @@ public class Users {
         this.password = password;
         this.country = country;
         this.dayOfBirth = dayOfBirth;
-        this.description = description;
-    }
-
-    public String getDayOfBirth() {
-        return dayOfBirth;
-    }
-
-    public void setDayOfBirth(String dayOfBirth) {
-        this.dayOfBirth = dayOfBirth;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -132,5 +130,39 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

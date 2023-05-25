@@ -2,6 +2,10 @@ package com.example.castudy_module_4.controller;
 
 import com.example.castudy_module_4.dto.MyUser;
 import com.example.castudy_module_4.service.IUserService;
+import com.example.castudy_module_4.dto.UserDto;
+import com.example.castudy_module_4.model.Users;
+import com.example.castudy_module_4.service.IUserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -27,8 +33,7 @@ public class LoginController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("user", userService.findUserByUsername(auth.getName()));
+
         return "adminPage";
     }
 
@@ -48,6 +53,8 @@ public class LoginController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findUserByUsername(auth.getName()));
+        String userName = principal.getName();
+        model.addAttribute("user", userService.findUserByUsername(userName))
 
         return "userInfoPage";
     }
@@ -64,4 +71,5 @@ public class LoginController {
         }
         return "403Page";
     }
+
 }
