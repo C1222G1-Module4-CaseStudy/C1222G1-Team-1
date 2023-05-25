@@ -54,7 +54,7 @@ public class LoginController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findUserByUsername(auth.getName()));
         String userName = principal.getName();
-        model.addAttribute("user", userService.findUserByUsername(userName))
+        model.addAttribute("user", userService.findUserByUsername(userName));
 
         return "userInfoPage";
     }
