@@ -13,7 +13,7 @@ public class Product {
     private String name;
     private Double price;
 
-    private Integer quantity_storage;
+    private Integer quantityStorage;
 
     private String image;
     @Column(name = "exp")
@@ -31,11 +31,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String name, Double price, Integer quantity_storage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public Product(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.quantity_storage = quantity_storage;
+        this.quantityStorage = quantityStorage;
         this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
@@ -68,12 +68,12 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getQuantity_storage() {
-        return quantity_storage;
+    public Integer getQuantityStorage() {
+        return quantityStorage;
     }
 
-    public void setQuantity_storage(Integer quantity_storage) {
-        this.quantity_storage = quantity_storage;
+    public void setQuantityStorage(Integer quantityStorage) {
+        this.quantityStorage = quantityStorage;
     }
 
     public String getImage() {

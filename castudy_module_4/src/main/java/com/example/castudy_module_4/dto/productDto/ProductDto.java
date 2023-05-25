@@ -22,7 +22,7 @@ public class ProductDto implements Validator {
 //    @Pattern(regexp = "^\\d*(\\.\\d+)?$", message = "Amount must be a positive integer or decimal!")
     private Double price;
     @NotNull(message = "Số lượng không được để trống!")
-    private Integer quantity_storage;
+    private Integer quantityStorage;
     //    @NotBlank(message = "Image cannot be blank!")
     @NotNull
     private String image;
@@ -41,10 +41,10 @@ public class ProductDto implements Validator {
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, Integer quantity_storage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public ProductDto(String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.name = name;
         this.price = price;
-        this.quantity_storage = quantity_storage;
+        this.quantityStorage = quantityStorage;
         this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
@@ -69,12 +69,12 @@ public class ProductDto implements Validator {
         this.price = price;
     }
 
-    public Integer getQuantity_storage() {
-        return quantity_storage;
+    public Integer getQuantityStorage() {
+        return quantityStorage;
     }
 
-    public void setQuantity_storage(Integer quantity_storage) {
-        this.quantity_storage = quantity_storage;
+    public void setQuantityStorage(Integer quantity_storage) {
+        this.quantityStorage = quantity_storage;
     }
 
     public String getImage() {
