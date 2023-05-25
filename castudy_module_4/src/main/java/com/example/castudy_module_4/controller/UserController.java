@@ -25,20 +25,20 @@ public class UserController {
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(users , userDto);
         model.addAttribute("user" , userDto);
-        return "update";
+        return "user/update";
     }
     @GetMapping("/form-create")
     public String showFormCreate(Model model){
         UserDto userDto = new UserDto();
         model.addAttribute("user" , userDto);
-        return "create";
+        return "user/create";
     }
 
     @PostMapping("/update")
     public String update(@Validated @ModelAttribute(value = "user") UserDto userDto , BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("user" , userDto);
-            return "update";
+            return "user/update";
         }
         Users users = new Users();
         BeanUtils.copyProperties(userDto , users);
@@ -50,7 +50,7 @@ public class UserController {
     public String create(@Validated @ModelAttribute(value = "user") UserDto userDto ,BindingResult bindingResult , Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("user" , userDto);
-            return "create";
+            return "user/create";
         }
         Users users = new Users();
         BeanUtils.copyProperties(userDto , users);
