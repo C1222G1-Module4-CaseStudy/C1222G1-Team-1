@@ -2,26 +2,19 @@ package com.example.castudy_module_4.model.product;
 
 import javax.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name_product;
+    private String nameProduct;
     private Double price;
     private Integer quantity;
     private String img;
 
-
-    private Date EXP;
-    private Date MFG;
-
-    @Column(name = "exp")
     private String EXP;
-    @Column(name = "mfg")
+
     private String MFG;
 
     private Double weight;
@@ -36,12 +29,12 @@ public class Product {
     }
 
 
-    public Product(Integer id, String name_product, Double price, String img, Date EXP, Date MFG, Double weight, String descriptions, TypeProduct typeProduct) {
 
-    public Product(Integer id, String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+
+    public Product(Integer id, String nameProduct, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String descriptions, TypeProduct typeProduct) {
 
         this.id = id;
-        this.name_product = name_product;
+        this.nameProduct = nameProduct;
         this.price = price;
         this.quantity = quantity;
         this.img = img;
@@ -60,12 +53,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName_product() {
-        return name_product;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setName_product(String name_product) {
-        this.name_product = name_product;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public Double getPrice() {
@@ -131,5 +124,6 @@ public class Product {
     public void setTypeProduct(TypeProduct typeProduct) {
         this.typeProduct = typeProduct;
     }
+
 
 }

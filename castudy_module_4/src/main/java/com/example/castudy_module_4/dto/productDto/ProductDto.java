@@ -13,6 +13,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class ProductDto implements Validator {
+    private int id;
     @NotBlank(message = "Tên sản phẩm không được để trống!")
     private String name;
 
@@ -36,12 +37,15 @@ public class ProductDto implements Validator {
     private Double weight;
     @NotBlank(message = "Vui lòng nhập thông tin, không được để trống!")
     private String describe;
+    private double total;
     private TypeProduct typeProduct;
 
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+
+    public ProductDto(int id, String name, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String describe, double total, TypeProduct typeProduct) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -50,6 +54,7 @@ public class ProductDto implements Validator {
         this.MFG = MFG;
         this.weight = weight;
         this.describe = describe;
+        this.total = total;
         this.typeProduct = typeProduct;
     }
 
@@ -60,6 +65,15 @@ public class ProductDto implements Validator {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public Double getPrice() {
         return price;
@@ -123,6 +137,14 @@ public class ProductDto implements Validator {
 
     public void setTypeProduct(TypeProduct typeProduct) {
         this.typeProduct = typeProduct;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override

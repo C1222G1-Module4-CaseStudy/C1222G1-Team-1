@@ -5,19 +5,19 @@
     <title>Update bill</title>
 </head>
 <body>
+
+<p th:text="${bill.nameCustomer}"></p>
+
+<a th:href="@{/product?billId=__${bill.id}__}">Thêm sản phẩm</a>
 <table class="table">
     <thead>
     <tr>
-        <th></th>
-        <th></th>
-        <th></th>
+        <td>name</td>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td scope="row"></td>
-        <td></td>
-        <td></td>
     </tr>
     </tbody>
 </table>
