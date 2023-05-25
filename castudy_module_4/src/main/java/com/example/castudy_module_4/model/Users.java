@@ -18,10 +18,52 @@ public class Users {
     @Column(name="username")
     private String userName;
     private String password;
+  
     @OneToMany(mappedBy = "roles")
     List<UserRole> userRoles;
+    private String country;
+    private String dayOfBirth;
+    private String description;
 
     public Users() {
+    }
+
+    public Users(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, String country, String dayOfBirth, String description) {
+        this.fullName = fullName;
+        this.email = email;
+        this.gender = gender;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.image = image;
+        this.userName = userName;
+        this.password = password;
+        this.country = country;
+        this.dayOfBirth = dayOfBirth;
+        this.description = description;
+    }
+
+    public String getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {

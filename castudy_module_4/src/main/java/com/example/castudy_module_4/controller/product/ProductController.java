@@ -8,6 +8,8 @@ import com.example.castudy_module_4.model.product.Product;
 import com.example.castudy_module_4.service.*;
 
 import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.example.castudy_module_4.service.IProductService;
+import com.example.castudy_module_4.service.ITypeProductService;
 import org.springframework.beans.BeanUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,4 +128,46 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("msg", "Thêm mới sản phẩm thành công!");
         return "redirect:/product";
     }
+
+    @GetMapping("/edit/{id}")
+    public String getEditProduct(@PathVariable Integer id, Model model) {
+        Product product = iProductService.findById(id);
+        ProductDto productDto = new ProductDto();
+        BeanUtils.copyProperties(product, productDto);
+        model.addAttribute("productDto", productDto);
+        model.addAttribute("typeList", iTypeProductService.findAll());
+        return "/products/update_product";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(@ModelAttribute @Validated ProductDto productDto, BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("typeList", iTypeProductService.findAll());
+            return "/products/update_product";
+        }
+        Product product = new Product();
+        BeanUtils.copyProperties(productDto, product);
+        iProductService.update(product);
+        redirectAttributes.addFlashAttribute("msg", "Sửa sản phẩm thành công!");
+        return "redirect:/product";
+    }
+
+    @GetMapping("/delete")
+    public String deleteProduct(@RequestParam(value = "idDelete") Integer id, RedirectAttributes redirectAttributes) {
+        iProductService.delete(id);
+        redirectAttributes.addFlashAttribute("msg", "XOá thành cng sản phẩm!");
+        return "redirect:/product";
+    }
+
+//    @GetMapping
+
+
+    @GetMapping("/warehouse")
+    public String warehouse(Model model){
+        model.addAttribute("listProduct" , this.iProductService.findAll());
+
+        return "/products/warehouse";
+    }
+
 }

@@ -10,19 +10,21 @@ public class Product {
     private Integer id;
     private String nameProduct;
     private Double price;
-    private Integer quantity;
-    private String img;
 
-    private String EXP;
+    private Integer quantityStorage;
 
-    private String MFG;
+    private String image;
 
+    @Column(name = "exp")
+    private Date EXP;
+    @Column(name = "mfg")
+    private Date MFG;
     private Double weight;
 
     private String descriptions;
 
     @ManyToOne
-    @JoinColumn(name = "id_type_product", referencedColumnName = "idTypeProduct")
+    @JoinColumn(name = "id_type_product")
     private TypeProduct typeProduct;
 
     public Product() {
@@ -31,19 +33,21 @@ public class Product {
 
 
 
-    public Product(Integer id, String nameProduct, Double price, Integer quantity, String img, String EXP, String MFG, Double weight, String descriptions, TypeProduct typeProduct) {
 
+    public Product(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.nameProduct = nameProduct;
         this.price = price;
-        this.quantity = quantity;
-        this.img = img;
+        this.quantityStorage = quantityStorage;
+        this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
         this.descriptions = descriptions;
         this.typeProduct = typeProduct;
     }
+
+
 
     public Integer getId() {
         return id;
@@ -69,35 +73,36 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+
+    public Integer getQuantityStorage() {
+        return quantityStorage;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setQuantityStorage(Integer quantityStorage) {
+        this.quantityStorage = quantityStorage;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getEXP() {
+    public Date getEXP() {
         return EXP;
     }
 
-    public void setEXP(String EXP) {
+    public void setEXP(Date EXP) {
         this.EXP = EXP;
     }
 
-    public String getMFG() {
+    public Date getMFG() {
         return MFG;
     }
 
-    public void setMFG(String MFG) {
+    public void setMFG(Date MFG) {
         this.MFG = MFG;
     }
 
