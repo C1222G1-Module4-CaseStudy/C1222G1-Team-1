@@ -64,7 +64,7 @@
 <!--        <span th:if="${#fields.hasErrors()}" th:errors="*{typeProduct.nameTypeProduct}"></span>-->
 <!--    </div>-->
     <select name="typeProduct">
-        <option th:each="item, status:${typeList}" th:value="${item.getIdTypeProduct()}">
+        <option th:each="item, status:${typeList}" th:value="${item.getId()}">
             <p th:text="${item.nameTypeProduct}"></p>
         </option>
     </select>
