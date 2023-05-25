@@ -13,9 +13,14 @@ public class Product {
     private String name;
     private Double price;
 
+
     private Integer quantityStorage;
 
     private String image;
+
+    private Integer quantityStorage;
+    private String imgage;
+
     @Column(name = "exp")
     private Date EXP;
     @Column(name = "mfg")
@@ -31,7 +36,10 @@ public class Product {
     public Product() {
     }
 
+
     public Product(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+
+
         this.id = id;
         this.name = name;
         this.price = price;
@@ -43,6 +51,8 @@ public class Product {
         this.describe = describe;
         this.typeProduct = typeProduct;
     }
+
+
 
     public Integer getId() {
         return id;
@@ -67,6 +77,7 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 
     public Integer getQuantityStorage() {
         return quantityStorage;
