@@ -11,7 +11,8 @@ import java.util.List;
 
 public interface IProductRepository extends JpaRepository<Product, Integer> {
     Product findById(int id);
+    Page<Product> searchByPrice(Double price, Pageable pageable);
+
     Page<Product> findByNameIsLikeIgnoreCase(String name, Pageable pageable);
-    @Query(value = "select * from product where id_type_product = :idTypeProduct", nativeQuery = true)
-    List<Product> showListByTypeProduct(@Param("id") Integer idTypeProduct);
+
 }

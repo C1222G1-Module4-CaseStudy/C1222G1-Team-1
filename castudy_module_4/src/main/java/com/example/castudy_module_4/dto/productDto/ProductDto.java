@@ -8,17 +8,20 @@ import org.springframework.validation.Validator;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ProductDto implements Validator {
+    private Integer id;
     @NotBlank(message = "Tên sản phẩm không được để trống!")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Giá không được để trống!")
     @DecimalMin("0.0")
-    @DecimalMax(value = "99999.99", message = "qq")
+    @DecimalMax(value = "99999.99")
 //    @Pattern(regexp = "^\\d*(\\.\\d+)?$", message = "Amount must be a positive integer or decimal!")
     private Double price;
     @NotNull(message = "Số lượng không được để trống!")
@@ -30,7 +33,7 @@ public class ProductDto implements Validator {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date EXP;
     @NotNull(message = "Vui lòng không để trống!")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date MFG;
     @NotNull(message = "Vui lòng nhập thông tin, không được để trống!")
     private Double weight;
@@ -41,7 +44,8 @@ public class ProductDto implements Validator {
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public ProductDto(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.quantityStorage = quantityStorage;
@@ -51,6 +55,14 @@ public class ProductDto implements Validator {
         this.weight = weight;
         this.describe = describe;
         this.typeProduct = typeProduct;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -136,13 +148,16 @@ public class ProductDto implements Validator {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             LocalDate EXP = LocalDate.parse((CharSequence) productDto.getEXP(), formatter);
+            LocalDate MFG = LocalDate.parse((CharSequence) productDto.getMFG(), formatter);
             LocalDate now = LocalDate.now();
-            int storageTime = Period.between(EXP, now).getDays();
+            int storageTime = Period.between(EXP,now).getDays();
             if (storageTime > 21) {
-                errors.rejectValue("EXP", "EXP", "Vegetables are overdue!");
+                errors.rejectValue("EXP", "EXP", "Rau củ quả đã hết hạn!");
             }
+            ZoneId zoneId = ZoneId.systemDefault();
+            productDto.setMFG(Date.from(MFG.atStartOfDay(zoneId).toInstant()));
         } catch (DateTimeParseException e) {
-            errors.rejectValue("EXP", "EXP", "Invalid date format, please check again!");
+            errors.rejectValue("EXP", "EXP", "Không đúng định dạng vui lòng nhập lại!");
         }
     }
 }

@@ -16,7 +16,7 @@ public class ProductService implements IProductService {
     private IProductRepository iProductRepository;
 
     @Override
-    public List<Product> findAll() {
+    public List<Product> getAll() {
         return iProductRepository.findAll();
     }
 
@@ -51,7 +51,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<Product> showListTypeProduct(Integer id) {
-        return iProductRepository.showListByTypeProduct(id);
+    public Page<Product> findByPrice(Double price, Pageable pageable) {
+        return iProductRepository.searchByPrice(price, pageable);
     }
+
 }
