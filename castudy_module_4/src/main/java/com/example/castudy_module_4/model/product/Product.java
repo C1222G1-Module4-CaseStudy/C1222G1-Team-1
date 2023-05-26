@@ -13,7 +13,7 @@ public class Product {
     private String name;
     private Double price;
     private Integer quantityStorage;
-    private String imgage;
+    private String image;
     @Column(name = "exp")
     private String EXP;
     @Column(name = "mfg")
@@ -29,12 +29,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String name, Double price, Integer quantityStorage, String imgage, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public Product(Integer id, String name, Double price, Integer quantityStorage, String image, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantityStorage = quantityStorage;
-        this.imgage = imgage;
+        this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
@@ -50,12 +50,12 @@ public class Product {
         this.quantityStorage = quantityStorage;
     }
 
-    public String getImgage() {
-        return imgage;
+    public String getImage() {
+        return image;
     }
 
-    public void setImgage(String imgage) {
-        this.imgage = imgage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Integer getId() {
