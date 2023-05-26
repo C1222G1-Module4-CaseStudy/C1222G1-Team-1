@@ -107,4 +107,15 @@ public class ProductController {
         model.addAttribute("searchByName",searchByPrice);
         return "/products/list_product";
     }
+
+//    @GetMapping
+
+
+    @GetMapping("/warehouse")
+    public String warehouse(Model model){
+        model.addAttribute("listProduct" , this.iProductService.findAll());
+
+        return "/products/warehouse";
+    }
+
 }

@@ -12,12 +12,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @GetMapping
+    public String listUser(Model model){
+        List<Users> usersList = this.userService.findAll();
+        model.addAttribute("list" , usersList);
+        return "user/list";
+    }
 
     @GetMapping("/form-update/{id}")
     public String showFormUpdateProfile(@PathVariable int id , Model model){
