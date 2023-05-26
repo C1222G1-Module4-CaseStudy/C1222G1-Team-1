@@ -1,10 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 
+<div>
+    <h2>Chỉnh sửa sản phẩm</h2>
+    <div class="d-flex justify-content-center">
+        <form class="w-50 border border-2 border-success p-3 rounded formCSS" th:action="@{/product/update}"
+              th:object="${productDto}" method="POST" novalidate="novalidate">
+            <input type="hidden" th:field="*{id}" readonly/>
+
+            <div class="form-group">
+                <label for="name" class="h6">Tên sản phẩm:</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{name}"></p>
+                <div class="input-group">
+                    <input type="text" id="name" class="form-control" placeholder="Nhập tên sản phẩm.."
+                           th:field="*{name}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label for="price" class="h6">Giá (VNĐ):</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{price}"></p>
+                <div class="input-group">
+                    <input type="number" id="price" class="form-control" placeholder="Nhập giá sản phẩm.."
+                           th:field="*{price}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>
+                </div>
+            </div>
+
+            <!--            <div class="mt-3 form-group">-->
+            <!--                <label for="price" class="h6">Số lượng :</label>-->
+            <!--                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{quantityStorage}"></p>-->
+            <!--                <div class="input-group">-->
+            <!--                    <input type="number" id="quantityStorage" class="form-control" placeholder="Nhập  số lượng sản phẩm.."-->
+            <!--                           th:field="*{quantityStorage}"/>-->
+            <!--                    <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <div class="form-group">
+                <label for="name" class="h6">Hình ảnh:</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{image}"></p>
+                <div class="input-group">
+                    <input type="text" id="image" class="form-control" placeholder="Nhập hình ảnh sản phẩm.."
+                           th:field="*{image}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="h6">Ngày sản xuất:</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{MFG}"></p>
+                <div class="input-group">
+                    <input type="date" id="mfg" class="form-control" placeholder="Nhập Ngày sản xuất.."
+                           th:field="*{MFG}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="h6">Hạn sử dụng:</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{EXP}"></p>
+                <div class="input-group">
+                    <input type="date" id="exp" class="form-control" placeholder="Nhập Hạn sử dụng.."
+                           th:field="*{EXP}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label class="h6" for="type">Loại sản phẩm:</label>
+                <div class="input-group">
+                    <select id="type" class="form-select" th:field="*{typeProduct.nameTypeProduct}">
+                        <option th:each="item : ${typeList}" th:value="${item.nameTypeProduct}"
+                                th:text="${item.nameTypeProduct}"></option>
+                    </select>
+                    <span class="input-group-text"><i class="fa-solid fa-ranking-star"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label for="price" class="h6">Khối lượng:</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{weight}"></p>
+                <div class="input-group">
+                    <input type="number" id="weight" class="form-control" placeholder="Nhập khối lượng sản phẩm.."
+                           th:field="*{weight}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="h6">Mô tả sản phẩm:</label>
+                <p style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{describe}"></p>
+                <div class="input-group">
+                    <input type="text" id="describe" class="form-control" placeholder="Nhập mô tả sản phẩm.."
+                           th:field="*{describe}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center">
+                <button class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
+                    -- Lưu <i class="fa-solid fa-floppy-disk"></i> --
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>

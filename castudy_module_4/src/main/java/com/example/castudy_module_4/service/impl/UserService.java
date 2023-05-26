@@ -22,7 +22,7 @@ public class UserService implements IUserService {
 
     public List<Users> getAll() {
         return userRepository.findAll();
-
+    }
     public Users findById(int id) {
         return this.userRepository.findById(id).get();
     }

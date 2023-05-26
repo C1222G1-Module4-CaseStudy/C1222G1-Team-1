@@ -49,7 +49,6 @@ public class ProductController {
 
     @GetMapping()
     public String listProduct(Model model, String billId) {
-
         model.addAttribute("typeList", iTypeProductService.findAll());
         model.addAttribute("products", iProductService.getAll());
         model.addAttribute("billId", billId);
@@ -82,30 +81,30 @@ public class ProductController {
         model.addAttribute("billId", billId);
         return "/products/list_product";
     }
-    @GetMapping("/product-add-to-bill")
-    public String getProductsFromBill(@SessionAttribute(name = "billDTO") BillDTO billDTO, Model model) {
-        Set<Integer> productIds = billDTO.getSelectedProduct().keySet();
-
-        Map<Integer, Product> mapProducts = iProductService.getListProductByIds(productIds).stream()
-                .collect(Collectors.toMap(Product::getId, p -> p));
-
-        List<ProductDto> products = billDTO.getSelectedProduct().entrySet().stream().
-                map(e -> new ProductDto(e.getKey()
-                        , mapProducts.get(e.getKey()).getNameProduct(),
-                        mapProducts.get(e.getKey()).getPrice(),
-                        e.getValue(),
-                        mapProducts.get(e.getKey()).getImg(),
-                        mapProducts.get(e.getKey()).getEXP(),
-                        mapProducts.get(e.getKey()).getMFG(),
-                        mapProducts.get(e.getKey()).getWeight(),
-                        mapProducts.get(e.getKey()).getDescriptions(),
-                        mapProducts.get(e.getKey()).getPrice() * e.getValue(),
-                        mapProducts.get(e.getKey()).getTypeProduct())).
-                collect(Collectors.toCollection(LinkedList::new));
-        model.addAttribute("total", iBillService.totalBill(products));
-        model.addAttribute("products", products);
-        return "/createBill";
-    }
+//    @GetMapping("/product-add-to-bill")
+//    public String getProductsFromBill(@SessionAttribute(name = "billDTO") BillDTO billDTO, Model model) {
+//        Set<Integer> productIds = billDTO.getSelectedProduct().keySet();
+//
+//        Map<Integer, Product> mapProducts = iProductService.getListProductByIds(productIds).stream()
+//                .collect(Collectors.toMap(Product::getId, p -> p));
+//
+//        List<ProductDto> products = billDTO.getSelectedProduct().entrySet().stream().
+//                map(e -> new ProductDto(e.getKey()
+//                        , mapProducts.get(e.getKey()).getNameProduct(),
+//                        mapProducts.get(e.getKey()).getPrice(),
+//                        e.getValue(),
+//                        mapProducts.get(e.getKey()).getImage(),
+//                        mapProducts.get(e.getKey()).getEXP(),
+//                        mapProducts.get(e.getKey()).getMFG(),
+//                        mapProducts.get(e.getKey()).getWeight(),
+//                        mapProducts.get(e.getKey()).getDescriptions(),
+//                        mapProducts.get(e.getKey()).getPrice() * e.getValue(),
+//                        mapProducts.get(e.getKey()).getTypeProduct())).
+//                collect(Collectors.toCollection(LinkedList::new));
+//        model.addAttribute("total", iBillService.totalBill(products));
+//        model.addAttribute("products", products);
+//        return "/createBill";
+//    }
 
 
     @GetMapping("/create-form-product")
@@ -162,12 +161,26 @@ public class ProductController {
 
 //    @GetMapping
 
-
-    @GetMapping("/warehouse")
-    public String warehouse(Model model){
-        model.addAttribute("listProduct" , this.iProductService.findAll());
-
-        return "/products/warehouse";
+    @GetMapping("/formcheckid")
+    public String showFormCheckId(){
+        return "/products/inputwarehouse";
     }
 
-}
+    @GetMapping("checkid")
+    public String checkId(@RequestParam(name = "numberId") int id , Model model){
+        boolean flag = this.iProductService.checkId(id);
+        if(flag){
+            model.addAttribute("flag" , flag);
+            return "/products/inputwarehouse";
+        }
+        model.addAttribute("product" , this.iProductService.findById(id));
+        return "/products/warehouse";
+        }
+
+    @PostMapping("/warehouse/{id}")
+    public String warehouse(@PathVariable("id") int id,@RequestParam("numberWareHouse")int quantity, Model model){
+        Product product = this.iProductService.findById(id);
+        this.iProductService.UpQuantity(product,quantity);
+        return "redirect:/";
+    }
+    }

@@ -43,9 +43,8 @@ public class ProductDto implements Validator {
     public ProductDto() {
     }
 
-    public ProductDto(String name, Double price, Integer quantityStorage, String image, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
-=======
-    public ProductDto(String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {        this.name = name;
+    public ProductDto(String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+        this.name = name;
         this.price = price;
         this.quantityStorage = quantityStorage;
         this.image = image;
@@ -56,6 +55,7 @@ public class ProductDto implements Validator {
         this.total = total;
         this.typeProduct = typeProduct;
     }
+
 
     public String getName() {
         return name;
@@ -86,8 +86,6 @@ public class ProductDto implements Validator {
         return quantityStorage;
     }
 
-    public void setQuantityStorage(Integer quantityStorage) {
-        this.quantityStorage = quantityStorage;
     public void setQuantityStorage(Integer quantity_storage) {
         this.quantityStorage = quantity_storage;
     }

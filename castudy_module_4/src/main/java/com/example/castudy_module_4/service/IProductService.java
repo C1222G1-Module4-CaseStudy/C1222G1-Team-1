@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface IProductService {
-    List<Product> findAll();
     void create(Product product);
     void update(Product product);
     void delete(Integer id);
@@ -19,4 +18,7 @@ public interface IProductService {
 List<Product> getListProductByIds(Set<Integer> ids);
 
     List<Product> getAll();
+    boolean checkId(int id);
+
+    void UpQuantity(Product product,int quantity);
 }
