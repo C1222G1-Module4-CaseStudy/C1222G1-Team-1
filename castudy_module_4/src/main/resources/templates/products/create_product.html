@@ -29,9 +29,10 @@
         <span th:if="${#fields.hasErrors()}" th:errors="*{price}"></span>
     </div>
     <div class="input-group">
-        <label for="quantity">Số lượng : </label>
+        <label for="quantity_storage">Số lượng : </label>
         <input type="text"
                class="form-control" name="fullName" id="quantity" aria-describedby="helpId" placeholder=""
+               class="form-control" name="fullName" id="quantity_storage" aria-describedby="helpId" placeholder=""
                th:field="*{quantityStorage}">
         <span th:if="${#fields.hasErrors()}" th:errors="*{quantityStorage}"></span>
     </div>

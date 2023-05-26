@@ -1,5 +1,6 @@
 package com.example.castudy_module_4.service.impl;
 
+import com.example.castudy_module_4.dto.productDto.ProductDto;
 import com.example.castudy_module_4.model.Bill;
 import com.example.castudy_module_4.repository.BillRepository;
 import com.example.castudy_module_4.service.IBillService;
@@ -20,5 +21,19 @@ public class BillService implements IBillService {
     @Override
     public void save(Bill bill) {
         billRepository.save(bill);
+    }
+
+    @Override
+    public int totalBill(List<ProductDto> products) {
+        int total=0;
+        for (int i = 0; i < products.size(); i++) {
+            total+=products.get(i).getTotal();
+        }
+        return total;
+    }
+
+    @Override
+    public Bill findById(int billId) {
+        return billRepository.findById(billId).get();
     }
 }

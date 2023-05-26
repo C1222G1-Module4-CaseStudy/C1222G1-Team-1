@@ -5,34 +5,28 @@ import com.example.castudy_module_4.model.product.Product;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "detail_bill")
+@Table
 public class DetailBill {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @Column(name = "quantity_order")
-    private int quantityOrder;
-    @Column(name = "total")
-    private float total;
-
+    @ManyToOne
+    @JoinColumn(name = "id_product")
+    private Product product;
     @ManyToOne
     @JoinColumn(name = "id_bill")
     private Bill bill;
 
-    @ManyToOne
-    @JoinColumn(name = "id_product")
-    private Product product;
+    private int quantity;
 
     public DetailBill() {
     }
 
-    public DetailBill(int id, int quantityOrder, float total, Bill bill, Product product) {
+    public DetailBill(int id, Product product, Bill bill, int quantity) {
         this.id = id;
-        this.quantityOrder = quantityOrder;
-        this.total = total;
-        this.bill = bill;
         this.product = product;
+        this.bill = bill;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -43,20 +37,12 @@ public class DetailBill {
         this.id = id;
     }
 
-    public int getQuantityOrder() {
-        return quantityOrder;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setQuantityOrder(int quantityOrder) {
-        this.quantityOrder = quantityOrder;
-    }
-
-    public float getTotal() {
-        return total;
-    }
-
-    public void setTotal(float total) {
-        this.total = total;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Bill getBill() {
@@ -67,11 +53,11 @@ public class DetailBill {
         this.bill = bill;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
@@ -11,17 +11,19 @@
 </head>
 <body>
 <div class="container">
-    <a th:href="@{/create-form}" class="btn btn-primary">create bill</a>
+    <a th:href="@{/bill/create-form}" class="btn btn-primary">create bill</a>
     <table class="table">
         <thead>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Customer name</th>
+                <th>Phone number</th>
+                <th>Sale date</th>
+                <th>Sale Name</th>
+                <th>Pay type</th>
             </tr>
         </thead>
         <tbody>
-        <th:block th:each="bill, index: ${bills}">
+        <th:block th:each="bill,inerStat :${bills}">
             <tr>
                 <td scope="row" th:text="${bill.nameCustomer}"></td>
                 <td th:text="${bill.phoneNumber}"></td>
