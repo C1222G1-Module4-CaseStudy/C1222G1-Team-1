@@ -1,34 +1,32 @@
-package com.example.castudy_module_4.model;
+package com.example.castudy_module_4.dto.employeeDTO;
 
-import javax.persistence.*;
-import java.util.List;
+import com.example.castudy_module_4.model.Users;
 
-@Entity
-@Table(name = "users")
-public class Users {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+public class UserDTO {
+    @NotBlank(message = "Không được để trống")
     private String fullName;
+    @Email(message = "phải thuộc dạng email chuẩn xxx@gmail.com")
     private String email;
+    @NotBlank(message = "Không được để trống")
     private String gender;
+    @NotBlank(message = "Không được để trống ")
     private String address;
+    @Pattern(regexp = "^0\\d{9}$",message = "Số điện thoại phải 0xxxxxxxxx")
     private String phoneNumber;
     private String image;
-    @Column(name="username")
+    @NotBlank(message = "Không được để trống")
     private String userName;
+    @NotBlank(message = "Không được để trống")
     private String password;
-  
-    @OneToMany(mappedBy = "roles")
-    List<UserRole> userRoles;
-    private String country;
-    private String dayOfBirth;
-    private String description;
 
-    public Users() {
+    public UserDTO() {
     }
 
-    public Users(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password, String country, String dayOfBirth, String description) {
+    public UserDTO(String fullName, String email, String gender, String address, String phoneNumber, String image, String userName, String password) {
         this.fullName = fullName;
         this.email = email;
         this.gender = gender;
@@ -37,41 +35,6 @@ public class Users {
         this.image = image;
         this.userName = userName;
         this.password = password;
-        this.country = country;
-        this.dayOfBirth = dayOfBirth;
-        this.description = description;
-    }
-
-    public String getDayOfBirth() {
-        return dayOfBirth;
-    }
-
-    public void setDayOfBirth(String dayOfBirth) {
-        this.dayOfBirth = dayOfBirth;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFullName() {
@@ -114,14 +77,6 @@ public class Users {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -136,5 +91,13 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

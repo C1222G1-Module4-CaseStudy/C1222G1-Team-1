@@ -8,12 +8,10 @@ import java.util.List;
 public interface IUserService {
     Users findUserByUsername(String name);
 
+    List<Users> getAll();
     Users findById(int id);
 
     void update(Users users);
 
     void create(Users users);
-
-    List<Users> findAll();
-//    void update()
 }
