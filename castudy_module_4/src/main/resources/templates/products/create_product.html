@@ -74,9 +74,9 @@
                                                       style="color: red"></span>
                                             </div>
                                             <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-                                                <select name="typeProduct">
+                                                <select name="typeList">
                                                     <option th:each="item, status:${typeList}" th:value="${item.getId()}">
-                                                        <p th:text="${item.nameTypeProduct}"></p>
+                                                        <p th:text="${item.nameType}"></p>
                                                     </option>
                                                 </select>
                                             </div>
