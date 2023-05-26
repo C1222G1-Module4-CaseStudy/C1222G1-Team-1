@@ -56,6 +56,7 @@ public class ProductDto implements Validator {
         this.typeProduct = typeProduct;
     }
 
+
     public String getName() {
         return name;
     }

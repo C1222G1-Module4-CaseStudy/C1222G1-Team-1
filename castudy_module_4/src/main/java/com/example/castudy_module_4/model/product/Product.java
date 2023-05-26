@@ -1,6 +1,7 @@
 package com.example.castudy_module_4.model.product;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "product")
@@ -12,7 +13,6 @@ public class Product {
     private Double price;
 
     private Integer quantityStorage;
-
     private String image;
 
     @Column(name = "exp")
@@ -30,10 +30,6 @@ public class Product {
     public Product() {
     }
 
-
-
-
-
     public Product(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.nameProduct = nameProduct;
@@ -46,7 +42,6 @@ public class Product {
         this.descriptions = descriptions;
         this.typeProduct = typeProduct;
     }
-
 
 
     public Integer getId() {
@@ -129,6 +124,5 @@ public class Product {
     public void setTypeProduct(TypeProduct typeProduct) {
         this.typeProduct = typeProduct;
     }
-
 
 }

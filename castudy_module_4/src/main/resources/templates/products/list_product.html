@@ -55,9 +55,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product, status: ${products.content}">
-                <td th:text="${status.count + products.number * 5}"></td>
-                <td th:text="${product.name}"></td>
+            <tr th:each="product, status: ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.nameProduct}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.quantityStorage}"></td>
                 <td><img th:src="${product.image}" th:width="100"></td>
@@ -65,20 +65,20 @@
                 <td th:text="${product.EXP}"></td>
                 <td th:text="${product.typeProduct?.nameTypeProduct}"></td>
                 <td th:text="${product.weight}"></td>
-                <td th:text="${product.describe}"></td>
-                <td>Sửa</td>
+                <td th:text="${product.descriptions}"></td>
+                <td><a th:href="@{/product/edit/{id}(id = ${product.id})}">sửa</a></td>
                 <td>Xóa</td>
             </tr>
             </tbody>
         </table>
         <br>
-        <div>
-            <a th:href="@{'/product'(page=${products.number -1}, search=${searchByName})}"
-               th:if="${products.hasPrevious()}">Previous</a>
-            <span th:text="${products.number +1}"></span>/<span th:text="${products.totalPages}"></span>
-            <a th:href="@{'/product'(page=${products.number +1}, search=${searchByName})}"
-               th:if="${products.hasNext()}">Next</a>
-        </div>
+<!--        <div>-->
+<!--            <a th:href="@{'/product'(page=${products.size() -1}, search=${searchByName})}"-->
+<!--               th:if="${products.hasPrevious()}">Previous</a>-->
+<!--            <span th:text="${products.number +1}"></span>/<span th:text="${products.totalPages}"></span>-->
+<!--            <a th:href="@{'/product'(page=${products.number +1}, search=${searchByName})}"-->
+<!--               th:if="${products.hasNext()}">Next</a>-->
+<!--        </div>-->
     </div>
 </div>
 

@@ -16,10 +16,6 @@ public class ProductService implements IProductService {
     @Autowired
     private IProductRepository iProductRepository;
 
-    @Override
-    public List<Product> findAll() {
-        return iProductRepository.findAll();
-    }
 
     @Override
     public void create(Product product) {
@@ -59,6 +55,23 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAll() {
         return iProductRepository.findAll();
+    }
+
+    @Override
+    public boolean checkId(int id) {
+        List<Product> list = this.iProductRepository.findAll();
+        for (int i = 0; i < list.size() ; i++) {
+            if(list.get(i).getId() == id){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void UpQuantity(Product product,int quantity) {
+        product.setQuantityStorage(product.getQuantityStorage() + quantity);
+        update(product);
     }
 
 //    @Override
