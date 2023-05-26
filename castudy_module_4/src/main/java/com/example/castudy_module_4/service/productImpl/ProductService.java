@@ -18,6 +18,13 @@ public class ProductService implements IProductService {
 
 
     @Override
+    public List<Product> getAll() {
+        return iProductRepository.findAll();
+    }
+
+
+
+    @Override
     public void create(Product product) {
         iProductRepository.save(product);
     }
@@ -58,6 +65,12 @@ public class ProductService implements IProductService {
     }
 
     @Override
+
+    public Page<Product> findByPrice(Double price, Pageable pageable) {
+        return iProductRepository.searchByPrice(price, pageable);
+    }
+
+
     public boolean checkId(int id) {
         List<Product> list = this.iProductRepository.findAll();
         for (int i = 0; i < list.size() ; i++) {
@@ -74,8 +87,4 @@ public class ProductService implements IProductService {
         update(product);
     }
 
-//    @Override
-//    public List<Product> showListTypeProduct(Integer id) {
-//        return iProductRepository.showListByTypeProduct(id);
-//    }
 }

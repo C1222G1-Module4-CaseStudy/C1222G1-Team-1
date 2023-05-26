@@ -1,5 +1,7 @@
 package com.example.castudy_module_4.model.product;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,7 +25,7 @@ public class Product {
 
     private String descriptions;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_type_product")
     private TypeProduct typeProduct;
 

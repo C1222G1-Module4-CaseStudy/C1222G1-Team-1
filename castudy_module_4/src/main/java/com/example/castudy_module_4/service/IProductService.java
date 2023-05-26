@@ -8,12 +8,18 @@ import java.util.List;
 import java.util.Set;
 
 public interface IProductService {
+
+    List<Product> getAll();
+
     void create(Product product);
     void update(Product product);
     void delete(Integer id);
     Product findById(int id);
     Page<Product> findAll(Pageable pageable);
     Page<Product> searchByName(String name, Pageable pageable);
+
+    Page<Product> findByPrice(Double price, Pageable pageable);
+
 //    List<Product> showListTypeProduct(Integer id);
 List<Product> getListProductByIds(Set<Integer> ids);
 
@@ -21,4 +27,5 @@ List<Product> getListProductByIds(Set<Integer> ids);
     boolean checkId(int id);
 
     void UpQuantity(Product product,int quantity);
+
 }

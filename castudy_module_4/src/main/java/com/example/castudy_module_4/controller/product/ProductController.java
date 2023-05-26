@@ -48,10 +48,12 @@ public class ProductController {
     private ITypeProductService iTypeProductService;
 
     @GetMapping()
-    public String listProduct(Model model, String billId) {
+
+    public String listProduct(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
+                              Pageable pageable, Model model) {
         model.addAttribute("typeList", iTypeProductService.findAll());
-        model.addAttribute("products", iProductService.getAll());
-        model.addAttribute("billId", billId);
+        model.addAttribute("products", iProductService.findAll(pageable));
+
         return "/products/list_product";
     }
     @GetMapping("/{id}/add-to-bill/{billId}")
@@ -155,11 +157,34 @@ public class ProductController {
     @GetMapping("/delete")
     public String deleteProduct(@RequestParam(value = "idDelete") Integer id, RedirectAttributes redirectAttributes) {
         iProductService.delete(id);
-        redirectAttributes.addFlashAttribute("msg", "XOá thành cng sản phẩm!");
+        redirectAttributes.addFlashAttribute("msg", "Xoá thành công sản phẩm!");
         return "redirect:/product";
     }
 
-//    @GetMapping
+    @GetMapping("/view/{id}")
+    public String view(@PathVariable int id, Model model) {
+        model.addAttribute("products", iProductService.findById(id));
+        model.addAttribute("typeProduct", iTypeProductService.findAll());
+        return "/products/detail";
+    }
+
+
+    @GetMapping("/search-name")
+    public String showListSearchName(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
+                                 Pageable pageable, @RequestParam(value = "searchByName", defaultValue = "")
+                                 String searchByName, Model model) {
+        model.addAttribute("products", iProductService.searchByName(searchByName, pageable));
+        model.addAttribute("searchByName",searchByName);
+        return "/products/list_product";
+    }
+    @GetMapping("/search-price")
+    public String showListSearchPrice(Pageable pageable, @RequestParam(value = "searchByPrice", defaultValue = "")
+                                 String searchByPrice, Model model) {
+        model.addAttribute("products", iProductService.searchByName(searchByPrice, pageable));
+        model.addAttribute("searchByName",searchByPrice);
+        return "/products/list_product";
+    }
+
 
     @GetMapping("/formcheckid")
     public String showFormCheckId(){
@@ -176,6 +201,7 @@ public class ProductController {
         model.addAttribute("product" , this.iProductService.findById(id));
         return "/products/warehouse";
         }
+
 
     @PostMapping("/warehouse/{id}")
     public String warehouse(@PathVariable("id") int id,@RequestParam("numberWareHouse")int quantity, Model model){

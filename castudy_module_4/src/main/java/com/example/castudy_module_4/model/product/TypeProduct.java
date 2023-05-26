@@ -34,7 +34,7 @@ private List<Product> products;
         this.id = id;
     }
 
-    public String getNameTypeProduct() {
+    public String getNameType() {
         return nameType;
     }
 
