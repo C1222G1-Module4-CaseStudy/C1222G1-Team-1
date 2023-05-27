@@ -13,9 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+
 
 import java.security.Principal;
 
@@ -54,7 +52,7 @@ public class LoginController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findUserByUsername(auth.getName()));
         String userName = principal.getName();
-        model.addAttribute("user", userService.findUserByUsername(userName))
+        model.addAttribute("user", userService.findUserByUsername(userName));
 
         return "userInfoPage";
     }

@@ -31,6 +31,9 @@ public class Bill {
     public Bill() {
     }
 
+    public interface BillView {
+        java.util.Date getSaleDate();
+    }
     public Bill(int id, String nameCustomer, String phoneNumber, Date saleDate, Users users, Payment payment) {
         this.id = id;
         this.nameCustomer = nameCustomer;
