@@ -13,16 +13,9 @@ import java.util.Set;
 public interface IProductRepository extends JpaRepository<Product, Integer> {
     Product findById(int id);
 
-    Page<Product> searchByPrice(Double price, Pageable pageable);
-
-    Page<Product> findByNameIsLikeIgnoreCase(String name, Pageable pageable);
-
-
-    Page<Product> findByNameProductIsLikeIgnoreCase(String name, Pageable pageable);
-
-    List<Product> findByIdIn(Set<Integer> ids);
-
-//    @Query(value = "select * from product where id_type_product = :idTypeProduct", nativeQuery = true)
-//    List<Product> showListByTypeProduct(@Param("id") Integer idTypeProduct);
-
+    @Query(value = "select * from Product " +
+            "where name_product like %:searchByName% and price like %:searchByPrice% ",
+            nativeQuery = true)
+    List<Product> searchByProduct(@Param("searchByName") String searchByName,
+                                  @Param("searchByPrice") String searchByPrice);
 }

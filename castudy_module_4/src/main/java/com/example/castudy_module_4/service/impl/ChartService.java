@@ -17,4 +17,9 @@ public class ChartService implements IChartService {
     public List<IChart> reportBill() {
         return chartRepository.reportBill();
     }
+
+    @Override
+    public List<IChart> reportSale() {
+        return chartRepository.reportSale();
+    }
 }

@@ -13,26 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
 @Controller
+
 public class LoginController {
     @Autowired
     private IUserService userService;
-
-    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
-    public String welcomePage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String welcomePage(Model model , Principal principal) {
         return "welcomePage";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String adminPage(Model model, Principal principal) {
-
-        return "adminPage";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -51,8 +46,8 @@ public class LoginController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.findUserByUsername(auth.getName()));
-        String userName = principal.getName();
-        model.addAttribute("user", userService.findUserByUsername(userName));
+//        String userName = principal.getName();
+//        model.addAttribute("user", userService.findUserByUsername(userName));
 
         return "userInfoPage";
     }

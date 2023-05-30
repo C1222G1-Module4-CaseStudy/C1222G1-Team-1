@@ -8,33 +8,34 @@ import javax.persistence.*;
 @Table
 public class DetailBill {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @ManyToOne
-    @JoinColumn(name = "id_product")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idDetail;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_product" ,referencedColumnName = "id")
     private Product product;
-    @ManyToOne
-    @JoinColumn(name = "id_bill")
+    @ManyToOne()
+    @JoinColumn(name = "id_bill",referencedColumnName = "id")
     private Bill bill;
 
-    private int quantity;
+    @Column(name = "quantity_order")
+    private int quantityOrder;
 
     public DetailBill() {
     }
 
-    public DetailBill(int id, Product product, Bill bill, int quantity) {
-        this.id = id;
+    public DetailBill(int idDetail, Product product, Bill bill, int quantityOrder) {
+        this.idDetail = idDetail;
         this.product = product;
         this.bill = bill;
-        this.quantity = quantity;
+        this.quantityOrder = quantityOrder;
     }
 
-    public int getId() {
-        return id;
+    public int getIdDetail() {
+        return idDetail;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdDetail(int idDetail) {
+        this.idDetail = idDetail;
     }
 
     public Product getProduct() {
@@ -53,11 +54,12 @@ public class DetailBill {
         this.bill = bill;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantityOrder() {
+        return quantityOrder;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantityOrder(int quantityOrder) {
+        this.quantityOrder = quantityOrder;
     }
+
 }

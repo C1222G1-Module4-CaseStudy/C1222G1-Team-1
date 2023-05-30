@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IChartService {
     List<IChart> reportBill();
+
+    List<IChart> reportSale();
 }

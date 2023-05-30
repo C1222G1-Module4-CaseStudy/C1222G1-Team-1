@@ -1,4 +1,4 @@
-﻿package com.example.castudy_module_4.controller.product;
+package com.example.castudy_module_4.controller.product;
 
 import com.example.castudy_module_4.dto.employeeDTO.BillDTO;
 import com.example.castudy_module_4.dto.productDto.ProductDto;
@@ -6,8 +6,6 @@ import com.example.castudy_module_4.model.Bill;
 import com.example.castudy_module_4.model.DetailBill;
 import com.example.castudy_module_4.model.product.Product;
 import com.example.castudy_module_4.service.*;
-
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.example.castudy_module_4.service.IProductService;
 import com.example.castudy_module_4.service.ITypeProductService;
 import org.springframework.beans.BeanUtils;
@@ -23,11 +21,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/product")
@@ -47,67 +40,58 @@ public class ProductController {
     @Autowired
     private ITypeProductService iTypeProductService;
 
-    @GetMapping()
-
-    public String listProduct(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
-                              Pageable pageable, Model model) {
-        model.addAttribute("typeList", iTypeProductService.findAll());
-        model.addAttribute("products", iProductService.findAll(pageable));
-
-        return "/products/list_product";
-    }
-    @GetMapping("/{id}/add-to-bill/{billId}")
-    public String addToBill(@PathVariable(name = "id") int id, @PathVariable("billId") int billId, @SessionAttribute(name = "billDTO") BillDTO billDTO,
-                            Model model
-    ) {
-        // Lưu xuống bảng bill_detail
-        DetailBill detailBill = new DetailBill();
-        detailBill.setBill(iBillService.findById(billId));
-        detailBill.setProduct(iProductService.findById(id));
-        detailBill.setQuantity(1);
-        iDetailBillService.save(detailBill);
-//        Product product = iProductService.findById(id);
-//        boolean addProduct = false;
-//        for (Map.Entry<Integer, Integer> entry : billDTO.getSelectedProduct().entrySet()) {
-//            if (entry.getKey().equals(product.getId())) {
-//                entry.setValue(entry.getValue() + 1);
-//                addProduct = true;
-//            }
-//        }
-//        if (!addProduct) {
-//            billDTO.getSelectedProduct().put(product.getId(), 1);
-//        }
-        model.addAttribute("billId", billId);
-        model.addAttribute("typeList", iTypeProductService.findAll());
-        model.addAttribute("products", iProductService.getAll());
-        model.addAttribute("billId", billId);
-        return "/products/list_product";
-    }
-//    @GetMapping("/product-add-to-bill")
-//    public String getProductsFromBill(@SessionAttribute(name = "billDTO") BillDTO billDTO, Model model) {
-//        Set<Integer> productIds = billDTO.getSelectedProduct().keySet();
-//
-//        Map<Integer, Product> mapProducts = iProductService.getListProductByIds(productIds).stream()
-//                .collect(Collectors.toMap(Product::getId, p -> p));
-//
-//        List<ProductDto> products = billDTO.getSelectedProduct().entrySet().stream().
-//                map(e -> new ProductDto(e.getKey()
-//                        , mapProducts.get(e.getKey()).getNameProduct(),
-//                        mapProducts.get(e.getKey()).getPrice(),
-//                        e.getValue(),
-//                        mapProducts.get(e.getKey()).getImage(),
-//                        mapProducts.get(e.getKey()).getEXP(),
-//                        mapProducts.get(e.getKey()).getMFG(),
-//                        mapProducts.get(e.getKey()).getWeight(),
-//                        mapProducts.get(e.getKey()).getDescriptions(),
-//                        mapProducts.get(e.getKey()).getPrice() * e.getValue(),
-//                        mapProducts.get(e.getKey()).getTypeProduct())).
-//                collect(Collectors.toCollection(LinkedList::new));
-//        model.addAttribute("total", iBillService.totalBill(products));
-//        model.addAttribute("products", products);
-//        return "/createBill";
+//    @GetMapping("/{id}/add-to-bill/{billId}")
+//    public String addToBill(@PathVariable(name = "id") int id, @PathVariable("billId") int billId, @SessionAttribute(name = "billDTO") BillDTO billDTO,
+//                            Model model
+//    ) {
+//        // Lưu xuống bảng bill_detail
+//        DetailBill detailBill = new DetailBill();
+//        detailBill.setBill(iBillService.findById(billId));
+//        detailBill.setProduct(iProductService.findById(id));
+//        detailBill.setQuantity(1);
+//        iDetailBillService.save(detailBill);
+//        model.addAttribute("billId", billId);
+//        model.addAttribute("typeList", iTypeProductService.findAll());
+//        model.addAttribute("products", iProductService.getAll());
+//        model.addAttribute("billId", billId);
+//        return "/products/list_product";
 //    }
 
+    @GetMapping()
+    public String listProduct(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
+                              Pageable pageable,String billId,  Model model) {
+        model.addAttribute("typeList", iTypeProductService.findAll());
+        model.addAttribute("products", iProductService.findAll(pageable));
+        model.addAttribute("billId", billId);
+        return "/products/list_product";
+    }
+
+    @GetMapping("/{id}/add-to-bill/{billId}")
+    public String addToBill(@PathVariable(name = "id") int id, @PathVariable( name = "billId") int billId, Model model,@PageableDefault(size = 5)Pageable pageable) {
+        // Lưu xuống bảng bill_detail
+        DetailBill detailBill = iDetailBillService.findByProductByBill(id, billId);
+        if (detailBill == null) {
+            detailBill = new DetailBill();
+            detailBill.setBill(iBillService.findById(billId));
+            detailBill.setProduct(iProductService.findById(id));
+            detailBill.setQuantityOrder(1);
+        } else {
+            Product product = iProductService.findById(id);
+            detailBill.setQuantityOrder(detailBill.getQuantityOrder() + 1);
+            detailBill.setProduct(product);
+        }
+        iDetailBillService.save(detailBill);
+        model.addAttribute("billDetail", detailBill);
+        model.addAttribute("products", iProductService.findAll(pageable));
+        model.addAttribute("billsId", billId);
+        return "/products/list_product";
+    }
+    @GetMapping("/goInfoBill/{id}")
+    public String goInfoBill(Model model, @PathVariable int id) {
+        model.addAttribute("bill", iBillService.findById(id));
+        model.addAttribute("product",iProductService.findById(id));
+        return "/infoBill";
+    }
 
     @GetMapping("/create-form-product")
     public String getCreateProduct(Model model) {
@@ -125,8 +109,11 @@ public class ProductController {
         }
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
+        if(product.getImage() != null & product.getImage().startsWith(",")) {
+            product.setImage(product.getImage().substring(1));
+        }
         iProductService.create(product);
-        redirectAttributes.addFlashAttribute("msg", "Thêm mới sản phẩm thành công!");
+        redirectAttributes.addFlashAttribute("msg2", "Thêm mới sản phẩm thành công!");
         return "redirect:/product";
     }
 
@@ -150,7 +137,7 @@ public class ProductController {
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         iProductService.update(product);
-        redirectAttributes.addFlashAttribute("msg", "Sửa sản phẩm thành công!");
+        redirectAttributes.addFlashAttribute("msg1", "Sửa sản phẩm thành công!");
         return "redirect:/product";
     }
 
@@ -160,8 +147,6 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("msg", "Xoá thành công sản phẩm!");
         return "redirect:/product";
     }
-}
-
 
     @GetMapping("/view/{id}")
     public String view(@PathVariable int id, Model model) {
@@ -170,23 +155,16 @@ public class ProductController {
         return "/products/detail";
     }
 
+    @GetMapping("/search-product")
+    public String showListSearchProduct(@RequestParam(value = "searchByName", defaultValue = "") String searchByName,
+                                        @RequestParam(value = "searchByPrice", defaultValue = "")
+                                        String searchByPrice, Model model) {
 
-    @GetMapping("/search-name")
-    public String showListSearchName(@PageableDefault(value = 5, sort = "id", direction = Sort.Direction.DESC)
-                                 Pageable pageable, @RequestParam(value = "searchByName", defaultValue = "")
-                                 String searchByName, Model model) {
-        model.addAttribute("products", iProductService.searchByName(searchByName, pageable));
-        model.addAttribute("searchByName",searchByName);
+        model.addAttribute("product", iProductService.findByProduct(searchByName,searchByPrice));
+        model.addAttribute("searchByName", searchByName);
+        model.addAttribute("searchByPrice", searchByPrice);
         return "/products/list_product";
     }
-    @GetMapping("/search-price")
-    public String showListSearchPrice(Pageable pageable, @RequestParam(value = "searchByPrice", defaultValue = "")
-                                 String searchByPrice, Model model) {
-        model.addAttribute("products", iProductService.searchByName(searchByPrice, pageable));
-        model.addAttribute("searchByName",searchByPrice);
-        return "/products/list_product";
-    }
-
 
     @GetMapping("/formcheckid")
     public String showFormCheckId(){
@@ -204,11 +182,18 @@ public class ProductController {
         return "/products/warehouse";
         }
 
-
     @PostMapping("/warehouse/{id}")
-    public String warehouse(@PathVariable("id") int id,@RequestParam("numberWareHouse")int quantity, Model model){
+    public String warehouse(@PathVariable("id") int id, @RequestParam("numberWareHouse") int quantity, RedirectAttributes redirectAttributes) {
         Product product = this.iProductService.findById(id);
-        this.iProductService.UpQuantity(product,quantity);
-        return "redirect:/";
+        this.iProductService.UpQuantity(product, quantity);
+        redirectAttributes.addFlashAttribute("messageSuccess", "Nhập kho thành công");
+        return "redirect:/product";
+    }
+
+
+    @PostMapping("/saveBill")
+    public String saveBill(@ModelAttribute Bill bill, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("messages","Lưu thành công");
+        return "redirect:/bill";
     }
     }

@@ -1,43 +1,48 @@
 
 <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" th:href="@{/}">VEGANMARKET</a>
-        <a class="navbar-brand brand-logo-mini" th:href="@{/}">VEGANMARKET</a>
+        <a class="navbar-brand brand-logo mr-5 text-success" th:href="@{/}">
+            <img src="https://ik.imagekit.io/nguyenhoang/bg-image/vegetable__1_.png" alt="">
+            vegetmarket</a>
+<!--        <a class="navbar-brand brand-logo-mini" th:href="@{/}"><img src="" alt="logo"/></a>-->
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <i class="bi bi-list"></i>
         </button>
         <ul class="navbar-nav mr-lg-2">
-            <li class="nav-item nav-search d-none d-lg-block">
-                <div class="input-group">
-                    <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="bi bi-search"></i>
-                </span>
-                    </div>
-                    <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                </div>
-            </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-            <li></li>
+            <li class="nav-item nav-settings d-none d-lg-flex mx-3">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-telephone text-primary"></i>
+                    Liên hệ quản lý : 0984879321
+                </a>
+            </li>
+            <li class="nav-item nav-settings d-none d-lg-flex">
+                <a class="nav-link" href="#"> |
+                    <i class="bi bi-envelope text-primary"></i>
+                    Thư góp ý |
+                </a>
+            </li>
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                    <img src="images/faces/face28.jpg" alt="profile"/>
+                    <span th:utext="${#request.userPrincipal.name}"></span>
+                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="profile"/>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                     <a class="dropdown-item" th:href="@{/userInfo}">
                         <i class="bi bi-gear text-primary"></i>
-                        Settings
+                        Thông tin cá nhân
                     </a>
-                    <a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">
+                    <a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}"
+                       th:attr="onclick=|handleToast()|" >
                         <i class="bi bi-box-arrow-right text-primary"></i>
-                        Logout
+                        Đăng xuất
                     </a>
                     <a class="dropdown-item" th:if="${#request.userPrincipal == null}" th:href="@{/login}">
                         <i class="bi bi-box-arrow-right text-primary"></i>
-                        Login
+                        Đăng nhập
                     </a>
                 </div>
             </li>
@@ -52,20 +57,21 @@
         </button>
     </div>
 </nav>
-<!--<div style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">-->
-
-<!--  <a th:href="@{/}">Home</a>-->
-
-<!--  | &nbsp;-->
-
-<!--  <a th:href="@{/userInfo}">User Info</a>-->
-
-<!--  | &nbsp;-->
-
-<!--  <a th:href="@{/admin}">Admin</a>-->
-
-<!--  | &nbsp;-->
-
-<!--  <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>-->
-
+<!--<div class="toast">-->
+<!--    <div class="toast-header">-->
+<!--        <strong class="me-auto">Toast Header</strong>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>-->
+<!--    </div>-->
+<!--    <div class="toast-body">-->
+<!--        <p>Some text inside the toast body</p>-->
+<!--    </div>-->
 <!--</div>-->
+<script>
+    function handleToast() {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show())
+    }
+</script>

@@ -7,38 +7,55 @@
     function getReport(){
         $.ajax({
             url: 'http://localhost:8080/report',
-
             type: 'get',
-            success: function drawChart(elements) {
-                arrData = [['Element', 'Density', { role: 'style' }]];
-                $.each(elements, function(index, value){
-                    arrData.push([value.saleDate, value.revenue])
-                })
-                // Define the chart to be drawn.
-                let data = google.visualization.arrayToDataTable(arrData);
-                var view = new google.visualization.DataView(data);
+            success: function drawChart(res) {
+                // [{role:"string"},  {role:"number"}, ],
+                let data = google.visualization.arrayToDataTable([]);
+                data.addColumn('string', 'Tên sản phẩm');
+                data.addColumn('number', 'Số lượng');
+                data.addColumn({role:"style"});
+                $.each(res, function (i, obj) {
+                    // arr.push([
+                    //     obj.saleDate,
+                    //     obj.revenue,
+                    //     "gold"
+                    // ]);
+                    data.addRows([[
+                            obj.nameProduct,
+                            Number(obj.totals),
+                            "gold"
+                    ]]
+                    )
+                });
+
+                let view = new google.visualization.DataView(data);
                 view.setColumns([0, 1,
-                    { calc: "stringify",
+                    {
+                        calc: "stringify",
                         sourceColumn: 1,
                         type: "string",
-                        role: "annotation" },
+                        role: "annotation"
+                    },
                     2]);
 
-                var options = {
-                    title: "Density of Precious Metals, in g/cm^3",
-                    width: 600,
-                    height: 400,
-                    bar: {groupWidth: "95%"},
-                    legend: { position: "none" },
+                let options = {
+                    title: "Số lượng sản phẩm bán được",
+                    width: 900,
+                    height: 500,
+                    bar: {groupWidth: "90%"},
+                    legend: {position: "none"},
                 };
-                var chart = new google.visualization.ColumnChart(document.getElementById("myPieChart"));
+                let chart = new google.visualization.ColumnChart(document.getElementById("myPieChart"));
                 chart.draw(view, options);
-            },
+            }
+            ,
             error: () => {
                 alert("hệ thống đang bảo trì");
             }
         });
     }
+
+
 
 
 

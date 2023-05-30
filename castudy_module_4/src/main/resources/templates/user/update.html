@@ -34,65 +34,57 @@
                     <!--                <span class="text-black-50">edogaru@mail.com.my</span>-->
                 </div>
             </div>
-            <div class="col-md-5 border-right">
+            <div class="col-md-9 border-right">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Chỉnh sửa trang cá nhân</h4>
+                        <h2 class="text-right" style="margin-left: 31%">Chỉnh sửa trang cá nhân</h2>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">Họ và tên : </label>
-                            <input type="text" class="form-control" th:field="*{fullName}"></div>
+                            <input type="text" class="form-control" th:field="*{fullName}" style="width: 70%"></div>
                         <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{fullName}"></span>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">E-mail : </label>
-                            <input type="text" class="form-control" th:field="*{email}">
+                            <input type="text" class="form-control" th:field="*{email}" style="width: 70%">
                             <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{email}"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">Giới tính : </label>
-                            <input type="text" class="form-control" th:field="*{gender}" readonly>
+                            <input type="text" class="form-control" th:field="*{gender}" readonly style="width: 70%">
                             <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{gender}"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">Số điện thoại : </label>
-                            <input type="text" class="form-control" th:field="*{phoneNumber}">
+                            <input type="text" class="form-control" th:field="*{phoneNumber}" style="width: 70%">
                             <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{phoneNumber}"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">Ngày sinh : </label>
-                            <input type="date" class="form-control" th:field="*{dayOfBirth}">
+                            <input type="date" class="form-control" th:field="*{dayOfBirth}" style="width: 70%">
                             <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{dayOfBirth}"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">Quốc gia : </label>
-                            <input type="text" class="form-control" th:field="*{country}">
+                            <input type="text" class="form-control" th:field="*{country}" style="width: 70%">
                             <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{country}"></span>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label class="labels">Địa chỉ : </label>
-                            <input type="text" class="form-control" th:field="*{address}">
+                            <input type="text" class="form-control" th:field="*{address}" style="width: 70%">
                             <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{address}"></span>
                         </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-3 py-5">
-                    <div class="col-md-12">
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                      style="height: 100px" th:field="*{description}"></textarea>
+                        <div class="col-md-12" style="margin-left: 140px">
                             <label for="floatingTextarea2">Mô tả : </label>
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                      style="height: 100px ; width: 70%" th:field="*{description}" ></textarea>
+                            <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{description}"></span>
                         </div>
-                        <span style="color: red" th:if="${#fields.hasErrors()}" th:errors="*{description}"></span>
-                        <br>
-                        <button class="btn btn-primary profile-button" type="submit">Lưu chỉnh sửa</button>
+
                     </div>
-<!--                    <div class="mt-5 text-center">-->
-<!--                        -->
-<!--                    </div>-->
+                    <br>
+                    <div style="margin-left: 140px"> <button class="btn btn-primary profile-button" type="submit">Lưu chỉnh sửa</button></div>
+
                 </div>
             </div>
         </div>

@@ -1,20 +1,26 @@
 package com.example.castudy_module_4.model.product;
 
+import com.example.castudy_module_4.model.DetailBill;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nameProduct;
+    @Column(name = "name_product")
+    private String name;
     private Double price;
+
     private Integer quantityStorage;
+
     private String image;
+
     @Column(name = "exp")
     private String EXP;
     @Column(name = "mfg")
@@ -23,32 +29,28 @@ public class Product {
     @Column(name = "descriptions")
     private String describe;
 
-    @Column(name = "exp")
-    private Date EXP;
-    @Column(name = "mfg")
-    private Date MFG;
-    private Double weight;
-
-    private String descriptions;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_type_product")
     private TypeProduct typeProduct;
+    @OneToMany(mappedBy = "product" ,cascade = CascadeType.ALL)
+   private List<DetailBill> productList;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+
+    public Product(Integer id, String name, Double price, Integer quantityStorage, String image, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
+
 
         this.id = id;
-        this.nameProduct = nameProduct;
+        this.name = name;
         this.price = price;
         this.quantityStorage = quantityStorage;
         this.image = image;
         this.EXP = EXP;
         this.MFG = MFG;
         this.weight = weight;
-        this.descriptions = descriptions;
+        this.describe = describe;
         this.typeProduct = typeProduct;
     }
 
@@ -61,12 +63,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
+    public String getName() {
+        return name;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getPrice() {
@@ -76,6 +78,7 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 
     public Integer getQuantityStorage() {
         return quantityStorage;
@@ -93,19 +96,19 @@ public class Product {
         this.image = image;
     }
 
-    public Date getEXP() {
+    public String getEXP() {
         return EXP;
     }
 
-    public void setEXP(Date EXP) {
+    public void setEXP(String EXP) {
         this.EXP = EXP;
     }
 
-    public Date getMFG() {
+    public String getMFG() {
         return MFG;
     }
 
-    public void setMFG(Date MFG) {
+    public void setMFG(String MFG) {
         this.MFG = MFG;
     }
 
@@ -117,12 +120,12 @@ public class Product {
         this.weight = weight;
     }
 
-    public String getDescriptions() {
-        return descriptions;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public TypeProduct getTypeProduct() {
@@ -133,4 +136,11 @@ public class Product {
         this.typeProduct = typeProduct;
     }
 
+    public List<DetailBill> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<DetailBill> productList) {
+        this.productList = productList;
+    }
 }

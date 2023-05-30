@@ -1,10 +1,11 @@
-﻿package com.example.castudy_module_4.dto.productDto;
+package com.example.castudy_module_4.dto.productDto;
 
 import com.example.castudy_module_4.model.product.TypeProduct;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,9 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ProductDto implements Validator {
-
     private Integer id;
-
     @NotBlank(message = "Tên sản phẩm không được để trống!")
     private String name;
 
@@ -26,29 +25,29 @@ public class ProductDto implements Validator {
     @DecimalMax(value = "99999.99")
 //    @Pattern(regexp = "^\\d*(\\.\\d+)?$", message = "Amount must be a positive integer or decimal!")
     private Double price;
-    @NotNull(message = "Số lượng không được để trống!")
+    //    @NotNull(message = "Số lượng không được để trống!")
     private Integer quantityStorage;
     //    @NotBlank(message = "Image cannot be blank!")
-    @NotNull
+//    @NotNull
     private String image;
     @NotNull(message = "Vui lòng không để trống!")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date EXP;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Column(columnDefinition = "date")
+    private String EXP;
     @NotNull(message = "Vui lòng không để trống!")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date MFG;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Column(columnDefinition = "date")
+    private String MFG;
     @NotNull(message = "Vui lòng nhập thông tin, không được để trống!")
     private Double weight;
     @NotBlank(message = "Vui lòng nhập thông tin, không được để trống!")
     private String describe;
-    private double total;
     private TypeProduct typeProduct;
 
     public ProductDto() {
     }
 
-
-    public ProductDto(Integer id, String name, Double price, Integer quantityStorage, String image, Date EXP, Date MFG, Double weight, String describe, TypeProduct typeProduct) {
+    public ProductDto(Integer id, String name, Double price, Integer quantityStorage, String image, String EXP, String MFG, Double weight, String describe, TypeProduct typeProduct) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -58,10 +57,8 @@ public class ProductDto implements Validator {
         this.MFG = MFG;
         this.weight = weight;
         this.describe = describe;
-        this.total = total;
         this.typeProduct = typeProduct;
     }
-
 
     public Integer getId() {
         return id;
@@ -71,7 +68,6 @@ public class ProductDto implements Validator {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
@@ -80,17 +76,12 @@ public class ProductDto implements Validator {
         this.name = name;
     }
 
-
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public void setQuantity(Integer quantityStorage) {
-        this.quantityStorage = quantityStorage;
     }
 
     public Integer getQuantityStorage() {
@@ -109,19 +100,19 @@ public class ProductDto implements Validator {
         this.image = image;
     }
 
-    public Date getEXP() {
+    public String getEXP() {
         return EXP;
     }
 
-    public void setEXP(Date EXP) {
+    public void setEXP(String EXP) {
         this.EXP = EXP;
     }
 
-    public Date getMFG() {
+    public String getMFG() {
         return MFG;
     }
 
-    public void setMFG(Date MFG) {
+    public void setMFG(String MFG) {
         this.MFG = MFG;
     }
 
@@ -149,14 +140,6 @@ public class ProductDto implements Validator {
         this.typeProduct = typeProduct;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -175,7 +158,7 @@ public class ProductDto implements Validator {
                 errors.rejectValue("EXP", "EXP", "Rau củ quả đã hết hạn!");
             }
             ZoneId zoneId = ZoneId.systemDefault();
-            productDto.setMFG(Date.from(MFG.atStartOfDay(zoneId).toInstant()));
+            productDto.setMFG(String.valueOf(Date.from(MFG.atStartOfDay(zoneId).toInstant())));
         } catch (DateTimeParseException e) {
             errors.rejectValue("EXP", "EXP", "Không đúng định dạng vui lòng nhập lại!");
         }

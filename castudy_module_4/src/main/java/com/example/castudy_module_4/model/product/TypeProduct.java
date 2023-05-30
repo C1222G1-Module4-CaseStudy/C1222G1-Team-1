@@ -12,10 +12,11 @@ public class TypeProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-//    @Column(name = "name_type")
+
+    @Column(name = "name_type")
     private String  nameType;
-    @OneToMany(mappedBy = "typeProduct")
-private List<Product> products;
+    @OneToMany(mappedBy = "typeProduct", cascade = CascadeType.ALL)
+    private List<Product> products;
 
     public TypeProduct() {
     }

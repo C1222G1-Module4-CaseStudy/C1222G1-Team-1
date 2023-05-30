@@ -9,36 +9,184 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link href="../static/css/style.css" rel="stylesheet" />
+    <link href="../static/css/custom.css" rel="stylesheet" />
 </head>
 <body>
 <header>
-    <th:block th:include="/menu"></th:block>
+    <nav class="navbar col-lg-12 col-12 p-0 d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo mr-5 text-success" href="http://localhost:8080/">
+                <img src="https://ik.imagekit.io/nguyenhoang/bg-image/vegetable__1_.png" alt="">vegetmarket</a>
+            <!--        <a class="navbar-brand brand-logo-mini" th:href="@{/}"><img src="" alt="logo"/></a>-->
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <i class="bi bi-list"></i>
+            </button>
+            <ul class="navbar-nav mr-lg-2">
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-settings d-none d-lg-flex mx-3">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-telephone text-primary"></i>
+                        Liên hệ quản lý
+                    </a>
+                </li>
+                <li class="nav-item nav-settings d-none d-lg-flex">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-envelope text-primary"></i>
+                        Thư góp ý
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                        <i class="bi bi-bell mx-0"></i>
+                        <span class="count"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header">Thông báo</p>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-success">
+                                    <i class="ti-info-alt mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-normal">Lỗi ứng dụng</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    Bây giờ
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-warning">
+                                    <i class="ti-settings mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-normal">Cài đặt</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    tin nhắn riêng tư
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-info">
+                                    <i class="ti-user mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-normal">Có đơn hàng mới</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    2 ngày trước
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="profile"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="http://localhost:8080/userInfo">
+                            <i class="bi bi-gear text-primary"></i>
+                            Thông tin cá nhân
+                        </a>
+                        <a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">
+                            <i class="bi bi-box-arrow-right text-primary"></i>
+                            Đăng xuất
+                        </a>
+                        <a class="dropdown-item" th:if="${#request.userPrincipal == null}" th:href="@{/login}">
+                            <i class="bi bi-box-arrow-right text-primary"></i>
+                            Đăng nhập
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item nav-settings d-none d-lg-flex">
+                    <a class="nav-link" href="#">
+                        <i class="icon-ellipsis"></i>
+                    </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span class="icon-menu"></span>
+            </button>
+        </div>
+    </nav>
 </header>
 <div class="content row">
     <div class="col-3">
-        <th:block th:include="/sidebar"></th:block>
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/product">
+                        <i class="bi bi-columns-gap menu-icon"></i>
+                        <span class="menu-title">Danh sách sản phẩm</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/users">
+                        <i class="bi bi-people-fill menu-icon"></i>
+                        <span class="menu-title">Danh sách nhân viên</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/bill">
+                        <i class="bi bi-clipboard-check menu-icon"></i>
+                        <span class="menu-title">Danh sách hóa đơn</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/product/formcheckid">
+                        <i class="bi bi-box-seam menu-icon"></i>
+                        <span class="menu-title">Nhập kho</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:63342/castudy_module_4/castudy_module_4.main/templates/charts.html">
+                        <i class="bi bi-bar-chart-line menu-icon"></i>
+                        <span class="menu-title">Thống kê</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-person-rolodex menu-icon"></i>
+                        <span class="menu-title">Nhà cung cấp</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-truck menu-icon"></i>
+                        <span class="menu-title">Đơn vị vận chuyển</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <div class="col-9 container">
-        <table class="table" style="width: 300px; height: 200px">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Ngay ban</th>
-        <th>Doanh thu</th>
-    </tr>
-    </thead>
-    <tbody>
-        <th:block th:each="report, iState : ${listRevenue}">
-            <tr>
-                <td scope="row" th:text="${iState.index+1}"></td>
-                <td th:text="${report.getSaleDate()}"></td>
-                <td th:text="${report.getRevenue()}"></td>
-            </tr>
-        </th:block>
-    </tbody>
-</table>
-        <div id="myPieChart" style="width: 900px; height: 300px;"></div>
+<!--        <table class="table border rounded-1 bg-white br-10px" style="width: 300px; height: 200px">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>#</th>-->
+<!--        <th>Ngay ban</th>-->
+<!--        <th>Doanh thu</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--        <th:block th:each="report, iState : ${reports}">-->
+<!--            <tr>-->
+<!--                <td scope="row" th:text="${iState.index+1}"></td>-->
+<!--                <td th:text="${report.getSaleDate()}"></td>-->
+<!--                <td th:text="${report.getRevenue()}"></td>-->
+<!--            </tr>-->
+<!--        </th:block>-->
+<!--    </tbody>-->
+<!--</table>-->
+        <div id="myPieChart" style="width: 900px; height: 300px; margin: auto; margin-top: 58px"></div>
     </div>
 
 </div>

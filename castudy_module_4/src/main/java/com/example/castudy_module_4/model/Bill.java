@@ -22,26 +22,26 @@ public class Bill {
 
     private Date saleDate;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
+    @ManyToOne()
+    @JoinColumn(name = "id_user",referencedColumnName = "id")
     private Users users;
 
-    @ManyToOne
-    @JoinColumn(name = "id_payment")
+    @ManyToOne()
+    @JoinColumn(name = "id_payment",referencedColumnName = "id")
     private Payment payment;
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.REMOVE)
+    private List<DetailBill> detailBillList;
     public Bill() {
     }
 
-    public interface BillView {
-        java.util.Date getSaleDate();
-    }
-    public Bill(int id, String nameCustomer, String phoneNumber, Date saleDate, Users users, Payment payment) {
+    public Bill(int id, String nameCustomer, String phoneNumber, Date saleDate, Users users, Payment payment, List<DetailBill> detailBillList) {
         this.id = id;
         this.nameCustomer = nameCustomer;
         this.phoneNumber = phoneNumber;
         this.saleDate = saleDate;
         this.users = users;
         this.payment = payment;
+        this.detailBillList = detailBillList;
     }
 
     public int getId() {
@@ -90,5 +90,13 @@ public class Bill {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public List<DetailBill> getDetailBillList() {
+        return detailBillList;
+    }
+
+    public void setDetailBillList(List<DetailBill> detailBillList) {
+        this.detailBillList = detailBillList;
     }
 }

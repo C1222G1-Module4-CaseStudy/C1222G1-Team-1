@@ -5,4 +5,7 @@ import java.util.Date;
 public interface IChart {
     String getSaleDate();
     Double getRevenue();
+
+    String getNameProduct();
+    String getTotals();
 }
